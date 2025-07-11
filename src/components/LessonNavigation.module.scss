@@ -12,13 +12,16 @@
   flex-direction: column;
   padding: 1rem 1.5rem;
   border: 1px solid var(--border-color);
-  border-radius: 8px;
+  background-color: rgba(177, 163, 224, 0.1);
+  border-radius: 12px;
   width: 49%;
   transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
   color: var(--text-primary);
 
   &:hover {
     border-color: var(--accent-primary); // Use main orange accent
+    background-color: rgba(177, 163, 224, 0.2);
+    box-shadow: 0 4px 20px rgba(142, 105, 191, 0.25);
     
     .title {
       color: var(--accent-primary); // Title becomes orange
