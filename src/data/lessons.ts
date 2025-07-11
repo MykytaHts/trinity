@@ -2,9 +2,9 @@ import type { Lesson } from '../types/lesson';
 
 export const lessons: Lesson[] = [
   {
-    id: '1',
+    id: 'rust-basics',
     title: 'Введение в Rust',
-    imageUrl: 'https://images.unsplash.com/photo-1593720213428-28a5b9e94613?q=80&w=2070&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop',
     sections: [
       {
         id: '1-1',
@@ -38,21 +38,11 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: '2',
+    id: 'variables',
     title: 'Переменные и типы данных',
+    imageUrl: 'https://images.unsplash.com/photo-1502134249126-9f3755a50d78?q=80&w=2070&auto=format&fit=crop',
     sections: [
-      {
-        id: '2-1',
-        title: 'Переменные и изменяемость',
-        content: `
-          <p>В Rust переменные по умолчанию неизменяемы (immutable). Это один из способов, которым Rust поощряет вас писать код безопасным и простым для понимания.</p>
-          <p>Чтобы сделать переменную изменяемой, используйте ключевое слово <code>mut</code>.</p>
-          <pre><code>let mut x = 5;
-println!("The value of x is: {}", x);
-x = 6;
-println!("The value of x is: {}", x);</code></pre>
-        `,
-      },
+      { id: 'variables-mutability', title: 'Переменные и изменяемость' },
       {
         id: '2-2',
         title: 'Скалярные типы',
@@ -69,10 +59,11 @@ println!("The value of x is: {}", x);</code></pre>
     ],
   },
   {
-    id: '3',
+    id: 'ownership',
     title: 'Основные концепции: Владение и Заимствование',
-    imageUrl: 'https://images.unsplash.com/photo-1556075798-4825dfaaf498?q=80&w=2070&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1528642474498-1af0c17fd8c3?q=80&w=2069&auto=format&fit=crop',
     sections: [
+      { id: 'ownership-intro', title: 'Обзор урока' },
       {
         id: '3-1',
         title: 'Владение (Ownership)',
@@ -86,9 +77,11 @@ println!("The value of x is: {}", x);</code></pre>
     ],
   },
   {
-    id: '4',
+    id: 'structs-enums',
     title: 'Структуры и Перечисления (Structs & Enums)',
+    imageUrl: 'https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?q=80&w=1974&auto=format&fit=crop',
     sections: [
+      { id: 'structs-intro', title: 'Обзор урока' },
       {
         id: '4-1',
         title: 'Определение и использование Struct',
@@ -102,15 +95,16 @@ println!("The value of x is: {}", x);</code></pre>
     ],
   },
   {
-    id: '5',
+    id: 'error-handling',
     title: 'Обработка ошибок в Rust',
-    imageUrl: 'https://images.unsplash.com/photo-1517694712202-1428bc64a259?q=80&w=2070&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop',
     sections: [
-        {
-            id: '5-1',
-            title: 'Непаникующие ошибки с Result<T, E>',
-            content: '<p><code>Result</code> - это перечисление с вариантами <code>Ok</code> и <code>Err</code>. Это основной способ обработки ошибок в Rust.</p>',
-        },
+      { id: 'errors-intro', title: 'Введение в обработку ошибок' },
+      {
+        id: '5-1',
+        title: 'Непаникующие ошибки с Result<T, E>',
+        content: '<p><code>Result</code> - это перечисление с вариантами <code>Ok</code> и <code>Err</code>. Это основной способ обработки ошибок в Rust.</p>',
+      },
     ],
   },
 ]; 

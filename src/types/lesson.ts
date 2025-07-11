@@ -1,7 +1,7 @@
 export interface LessonSection {
   id: string;
   title: string;
-  content: string; // Может быть Markdown или HTML
+  content?: string; // Может быть Markdown или HTML
 }
 
 export interface Lesson {

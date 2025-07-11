@@ -1,8 +1,18 @@
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { FiGrid, FiBookOpen, FiChevronDown, FiChevronRight, FiFeather, FiSettings, FiChevronLeft } from 'react-icons/fi';
+import {
+  FiGrid,
+  FiBookOpen,
+  FiChevronDown,
+  FiChevronRight,
+  FiFeather,
+  FiSettings,
+  FiChevronLeft,
+  FiClipboard,
+} from 'react-icons/fi';
 import { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { lessons } from '../data/lessons';
+import { homeworkList } from '../data/homework';
 import styles from './Sidebar.module.scss';
 
 interface SidebarProps {
@@ -45,21 +55,19 @@ const Sidebar = ({ isCollapsed, toggleSidebar }: SidebarProps) => {
 
       <nav className={styles.nav}>
         <div className={styles.lessonGroup}>
-           <NavLink
-              to="/lessons"
-              className={({ isActive }) => menuItemClasses(isActive)}
-              end
-            >
-              <div className={styles.menuItemContent}>
-                <FiGrid className={styles.icon} />
-                {!isCollapsed && <span className={styles.text}>Все уроки</span>}
-              </div>
-            </NavLink>
+          <NavLink to="/lessons" className={({ isActive }) => menuItemClasses(isActive || !!lessonIdFromPath)} end>
+             <div className={styles.menuItemContent}>
+              <FiGrid className={styles.icon} />
+              {!isCollapsed && <span className={styles.text}>Все уроки</span>}
+            </div>
+          </NavLink>
         </div>
-        {/* <hr className={styles.divider} /> */}
+
         {lessons.map(lesson => {
           const isLessonOpen = openLessonId === lesson.id;
           const isLessonActive = lesson.id === lessonIdFromPath;
+          const lessonHomeworks = homeworkList.filter(hw => hw.lessonId === lesson.id);
+          const hasHomework = lessonHomeworks.length > 0;
 
           const lessonGroupClasses = classNames(styles.lessonGroup, {
             [styles.activeLessonGroup]: isLessonActive
@@ -99,24 +107,36 @@ const Sidebar = ({ isCollapsed, toggleSidebar }: SidebarProps) => {
                       {section.title}
                     </NavLink>
                   ))}
+                  {hasHomework && hasHomework && lessonHomeworks.map(hw => (
+                    <NavLink
+                      key={hw.id}
+                      to={`/homework/${hw.id}`}
+                      className={({ isActive }) => classNames(styles.sectionLink, styles.homeworkLink, { [styles.activeSection]: isActive })}
+                    >
+                      <FiClipboard className={styles.homeworkIcon} />
+                      {hw.title}
+                    </NavLink>
+                  ))}
               </div>
             </div>
           );
         })}
       </nav>
 
-      <div className={styles.sidebarFooter}>
-          <NavLink to="/settings" className={({isActive}) => classNames(styles.menuItem, {[styles.active]: isActive})}>
-            <div className={styles.menuItemContent}>
-              <FiSettings className={styles.icon} />
-              {!isCollapsed && <span className={styles.text}>Настройки</span>}
-            </div>
-          </NavLink>
-          <div className={styles.toggleButtonWrapper}>
-            <button onClick={toggleSidebar} className={styles.toggleButton}>
-                {isCollapsed ? <FiChevronRight /> : <FiChevronLeft />}
-            </button>
-          </div>
+      <div className={styles.footerContainer}>
+        <div className={styles.sidebarFooter}>
+            <NavLink to="/settings" className={({isActive}) => classNames(styles.menuItem, {[styles.active]: isActive})}>
+              <div className={styles.menuItemContent}>
+                <FiSettings className={styles.icon} />
+                {!isCollapsed && <span className={styles.text}>Настройки</span>}
+              </div>
+            </NavLink>
+        </div>
+        <div className={styles.toggleArea}>
+          <button onClick={toggleSidebar} className={styles.toggleButton}>
+              {isCollapsed ? <FiChevronRight /> : <FiChevronLeft />}
+          </button>
+        </div>
       </div>
     </aside>
   );

@@ -1,5 +1,5 @@
 .sidebar {
-  width: 320px;
+  width: 330px; /* Increased width */
   background-color: var(--accent-primary-darker);
   color: var(--accent-text-primary);
   display: flex;
@@ -173,86 +173,82 @@
 }
 
 .sectionLink {
+  font-size: 1rem; /* Matched to lesson title */
+  padding: 8px 8px 8px 25px;
   display: block;
-  color: var(--accent-text-primary);
-  opacity: 0.8;
-  padding: 10px 16px;
-  font-size: 15px;
-  font-weight: 500;
   text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
   border-radius: 6px;
-  /* white-space: nowrap; */ /* Allow text to wrap */
-  line-height: 1.4;
+  margin: 0 8px 4px; /* Added bottom margin */
+  line-height: 1.4; /* Allow wrapping */
+  transition: all 0.2s;
 
   &:hover {
-    color: var(--accent-text-primary);
-    background-color: var(--accent-primary-lighter);
-    opacity: 1;
-  }
-
-  &.activeSection {
-    color: var(--accent-text-primary);
-    font-weight: 700;
-    opacity: 1;
-  }
-}
-
-.sidebarFooter {
-  padding: 0;
-  border-top: 1px solid var(--accent-secondary);
-  flex-shrink: 0;
-  background-image: var(--accent-gradient);
-
-  .sidebar.collapsed & {
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-  }
-
-  & .menuItem,
-  & .toggleButton {
-    border-radius: 0;
-    margin: 0;
-    width: 100%;
-  }
-
-  & .menuItem {
-    background-color: transparent;
-
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-    }
-  }
-}
-
-.toggleButtonWrapper {
-  background-color: transparent;
-  transition: background-color 0.2s;
-
-  &:hover {
+    color: white;
     background-color: rgba(255, 255, 255, 0.1);
   }
 }
 
+.activeSection {
+  color: white !important;
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.homeworkLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 40px;
+  color: rgba(255, 255, 255, 0.6);
+
+  &:hover {
+    color: white;
+  }
+}
+
+.homeworkIcon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  opacity: 0.8;
+  transition: color 0.2s;
+}
+
+.activeSection.homeworkLink {
+  color: white !important;
+  .homeworkIcon {
+    color: white;
+  }
+}
+
+.footerContainer {
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+.sidebarFooter {
+  padding: 0.5rem;
+}
+
+.toggleArea {
+  padding: 0.5rem;
+  background-image: var(--accent-gradient);
+}
+
 .toggleButton {
   background: transparent;
-  color: var(--accent-text-primary);
   border: none;
+  color: white;
   cursor: pointer;
-  padding: 12px;
+  padding: 8px;
+  border-radius: 6px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  border-radius: 8px;
+  font-size: 1.2rem;
   
   &:hover {
-    /* The background hover effect is now on the wrapper */
-  }
-
-  .sidebar.collapsed & {
-    width: auto;
+    background-color: rgba(0, 0, 0, 0.2);
   }
 } 

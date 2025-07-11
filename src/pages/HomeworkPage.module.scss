@@ -1,0 +1,72 @@
+.container {
+  padding: 40px;
+}
+
+.infoBlock {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  background: linear-gradient(135deg, rgba(168, 126, 222, 0.05), rgba(132, 84, 184, 0.05));
+  border: 1px solid var(--border-color);
+  padding: 24px;
+  border-radius: 16px;
+  margin-bottom: 32px;
+}
+
+.infoIcon {
+  flex-shrink: 0;
+  color: var(--accent-primary);
+  font-size: 2rem;
+  margin-top: 4px;
+}
+
+.title {
+  font-size: 1.25rem; // Matched to card title
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.filterContainer {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.filterButton {
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: var(--accent-primary);
+    color: var(--text-primary);
+  }
+}
+
+.activeFilter {
+  background-color: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: white;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.homeworkGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+} 
