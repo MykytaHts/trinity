@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { homeworkList } from '../data/homework';
+import { homeworkList } from '../../data/homework';
 import styles from './HomeworkAssignmentPage.module.scss';
 
 const HomeworkAssignmentPage = () => {

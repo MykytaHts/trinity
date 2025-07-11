@@ -1,10 +1,10 @@
 import { FaUserCircle } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
-import ThemeToggle from './ThemeToggle';
+import ThemeToggle from '../ThemeToggle';
 import { useState, useRef } from 'react';
-import ProfileDropdown from './ProfileDropdown';
-import useOnClickOutside from '../hooks/useOnClickOutside';
+import ProfileDropdown from '../ProfileDropdown';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
 
 const Header = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);

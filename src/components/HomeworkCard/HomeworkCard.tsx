@@ -1,4 +1,4 @@
-import Button from '../Button/Button';
+import Button from '../../components/Button';
 import styles from './HomeworkCard.module.scss';
 import { FiArrowRight, FiBookOpen } from 'react-icons/fi';
 import classNames from 'classnames';

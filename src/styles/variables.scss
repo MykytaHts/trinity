@@ -1,0 +1,17 @@
+// src/styles/_variables.scss
+
+// Layout
+$sidebar-width: 260px;
+$sidebar-width-collapsed: 80px;
+$header-height: 60px;
+
+// Borders
+$border-radius: 8px;
+
+// Colors - эти переменные будут использоваться, если CSS-переменные не загрузятся
+$fallback-accent-primary: #8a4dff;
+$fallback-background-primary: #ffffff;
+$fallback-text-primary: #111111;
+
+// Gradients
+$gradient-accent: linear-gradient(135deg, #6b21a8, #9333ea); 

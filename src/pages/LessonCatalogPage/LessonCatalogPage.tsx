@@ -1,5 +1,5 @@
-import { lessons } from '../data/lessons';
-import LessonCard from '../components/LessonCard';
+import LessonCard from '../../components/LessonCard';
+import { lessons } from '../../data/lessons';
 import styles from './LessonCatalogPage.module.scss';
 
 const LessonCatalogPage = () => {

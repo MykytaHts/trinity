@@ -1,103 +1,121 @@
-import { NavLink } from 'react-router-dom';
-import { lessons } from '../../data/lessons';
+import { NavLink, Link, useLocation } from 'react-router-dom';
+import { FiGrid, FiBookOpen, FiChevronDown, FiChevronRight, FiCode, FiSettings, FiChevronLeft } from 'react-icons/fi';
+import { useState, useEffect } from 'react';
+import classNames from 'classnames';
+import { lessons } from '../../data/lessons'; // Adjusted path
 import styles from './Sidebar.module.scss';
-import {
-  FiChevronDown,
-  FiChevronRight,
-  FiCode,
-  FiClipboard, // Changed from FiFileText
-  FiHome,
-  FiTarget,
-  FiBook,
-} from 'react-icons/fi';
-import { useState } from 'react';
-import { homeworkList } from '../../data/homework'; // Ensured direct path
 
-const Sidebar = () => {
-  const [openLessons, setOpenLessons] = useState<Set<string>>(new Set());
+interface SidebarProps {
+  isCollapsed: boolean;
+  toggleSidebar: () => void;
+}
 
-  const toggleLesson = (id: string) => {
-    setOpenLessons((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(id)) {
-        newSet.delete(id);
-      } else {
-        newSet.add(id);
-      }
-      return newSet;
-    });
+const Sidebar = ({ isCollapsed, toggleSidebar }: SidebarProps) => {
+  const location = useLocation();
+  const [openLessonId, setOpenLessonId] = useState<string | null>(null);
+
+  const lessonIdFromPath = location.pathname.split('/lessons/')[1]?.split('#')[0];
+
+  useEffect(() => {
+    if (lessonIdFromPath) {
+      setOpenLessonId(lessonIdFromPath);
+    }
+  }, [lessonIdFromPath]);
+
+  const toggleLesson = (lessonId: string) => {
+    setOpenLessonId(prevId => (prevId === lessonId ? null : lessonId));
   };
 
+  const sidebarClasses = classNames(styles.sidebar, {
+    [styles.collapsed]: isCollapsed,
+  });
+
+  const menuItemClasses = (isActive: boolean) => classNames(styles.menuItem, {
+    [styles.active]: isActive,
+  });
+
   return (
-    <aside className={styles.sidebar}>
-      <div className={styles.header}>
-        <FiCode className={styles.logo} />
-        <span>Trinity</span>
+    <aside className={sidebarClasses}>
+      <div className={styles.sidebarHeader}>
+        <Link to="/" className={styles.logo}>
+          <FiCode className={styles.logoIcon} />
+          {!isCollapsed && <span className={styles.logoText}>Trinity</span>}
+        </Link>
       </div>
+
       <nav className={styles.nav}>
-        <NavLink to="/" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
-          <FiHome />
-          Дашборд
-        </NavLink>
-        <NavLink
-          to="/lessons"
-          className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}
-        >
-          <FiBook />
-          Все уроки
-        </NavLink>
-         <NavLink
-          to="/homework"
-          className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}
-        >
-          <FiTarget />
-          Центр Заданий
-        </NavLink>
+        <div className={styles.lessonGroup}>
+           <NavLink
+              to="/lessons"
+              className={({ isActive }) => menuItemClasses(isActive)}
+              end
+            >
+              <div className={styles.menuItemContent}>
+                <FiGrid className={styles.icon} />
+                {!isCollapsed && <span className={styles.text}>Все уроки</span>}
+              </div>
+            </NavLink>
+        </div>
+        {lessons.map(lesson => {
+          const isLessonOpen = openLessonId === lesson.id;
+          const isLessonActive = lesson.id === lessonIdFromPath;
 
-        <div className={styles.divider}></div>
-        <h3 className={styles.menuTitle}>Курс по Rust</h3>
-
-        {lessons.map((lesson) => {
-          const lessonHomeworks = homeworkList.filter((hw) => hw.lessonId === lesson.id);
-          const hasHomework = lessonHomeworks.length > 0;
-          const isOpen = openLessons.has(lesson.id);
+          const lessonGroupClasses = classNames(styles.lessonGroup, {
+            [styles.activeLessonGroup]: isLessonActive
+          });
 
           return (
-            <div key={lesson.id} className={styles.lessonGroup}>
-              <div className={styles.lessonLinkContainer}>
-                <NavLink
-                  to={`/lessons/${lesson.id}`}
-                  className={({ isActive }) => `${styles.link} ${styles.lessonLink} ${isActive ? styles.activeLesson : ''}`}
-                  end
-                >
-                  {lesson.title}
-                </NavLink>
-                {hasHomework && (
-                  <button onClick={() => toggleLesson(lesson.id)} className={styles.toggleButton}>
-                    {isOpen ? <FiChevronDown /> : <FiChevronRight />}
-                  </button>
-                )}
-              </div>
-              {hasHomework && isOpen && (
-                <div className={styles.homeworkSubmenu}>
-                  {lessonHomeworks.map((hw) => (
+            <div key={lesson.id} className={lessonGroupClasses}>
+              <div
+                className={menuItemClasses(isLessonActive)}
+                onClick={() => toggleLesson(lesson.id)}
+              >
+                <div className={styles.menuItemContent}>
+                  <FiBookOpen className={styles.icon} />
+                  {!isCollapsed && <span className={styles.text}>{lesson.title}</span>}
+                </div>
+                {!isCollapsed && (isLessonOpen ? <FiChevronDown className={styles.chevron}/> : <FiChevronRight className={styles.chevron}/>)}
+            </div>
+
+              <div className={classNames(styles.sectionMenu, {[styles.open]: !isCollapsed && isLessonOpen})}>
+                  <NavLink
+                    to={`/lessons/${lesson.id}`}
+                    className={({ isActive }) => classNames(styles.sectionLink, {
+                        [styles.activeSection]: isActive && location.hash === ''
+                    })}
+                    end
+                  >
+                    Обзор урока
+                  </NavLink>
+                  {lesson.sections.map(section => (
                     <NavLink
-                      key={hw.id}
-                      to={`/homework/${hw.id}`}
-                      className={({ isActive }) => `${styles.link} ${styles.sublink} ${isActive ? styles.active : ''}`}
+                      key={section.id}
+                      to={`/lessons/${lesson.id}#${section.id}`}
+                      className={classNames(styles.sectionLink, {
+                        [styles.activeSection]: location.hash === `#${section.id}`
+                      })}
                     >
-                      <FiClipboard />
-                      {hw.title}
+                      {section.title}
                     </NavLink>
                   ))}
-                </div>
-              )}
+              </div>
             </div>
           );
         })}
       </nav>
-      <div className={styles.footer}>
-        <p>© 2024 Trinity</p>
+
+      <div className={styles.sidebarFooter}>
+          <NavLink to="/settings" className={({isActive}) => classNames(styles.menuItem, {[styles.active]: isActive})}>
+          <div className={styles.menuItemContent}>
+              <FiSettings className={styles.icon} />
+              {!isCollapsed && <span className={styles.text}>Настройки</span>}
+            </div>
+          </NavLink>
+          <div className={styles.toggleButtonWrapper}>
+            <button onClick={toggleSidebar} className={styles.toggleButton}>
+                {isCollapsed ? <FiChevronRight /> : <FiChevronLeft />}
+            </button>
+          </div>
       </div>
     </aside>
   );

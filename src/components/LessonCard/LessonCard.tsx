@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import type { Lesson } from '../types/lesson';
+import type { Lesson } from '../../types/lesson';
 import styles from './LessonCard.module.scss';
 import { FaStream } from 'react-icons/fa';
 

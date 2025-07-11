@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import HomeworkCard from '../components/HomeworkCard/HomeworkCard';
-import { homeworkList } from '../data/homework';
+import HomeworkCard from '../../components/HomeworkCard';
+import { homeworkList } from '../../data/homework';
 import styles from './HomeworkPage.module.scss';
 import { FiInfo } from 'react-icons/fi';
 import classNames from 'classnames';

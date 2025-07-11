@@ -1,7 +1,8 @@
-import { useParams } from 'react-router-dom';
-import { lessons } from '../data/lessons';
+import { useParams, useLocation } from 'react-router-dom';
+import { lessons } from '../../data/lessons';
+import LessonNavigation from '../../components/LessonNavigation';
 import styles from './LessonPage.module.scss';
-import LessonNavigation from '../components/LessonNavigation';
+import { useEffect } from 'react';
 
 const LessonPage = () => {
   const { lessonId } = useParams<{ lessonId: string }>();
@@ -23,7 +24,9 @@ const LessonPage = () => {
       {lesson.sections.map(section => (
         <section key={section.id} id={section.id} className={styles.section}>
           <h2>{section.title}</h2>
-          <div dangerouslySetInnerHTML={{ __html: section.content }} />
+          {section.content && (
+            <div dangerouslySetInnerHTML={{ __html: section.content }} />
+          )}
         </section>
       ))}
       <LessonNavigation prevLesson={prevLesson} nextLesson={nextLesson} />
