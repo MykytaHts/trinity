@@ -1,0 +1,29 @@
+.dropdown {
+  position: absolute;
+  top: 65px;
+  right: 20px;
+  background-color: var(--background-secondary);
+  border-radius: 8px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+  border: 1px solid var(--border-color);
+  width: 200px;
+  z-index: 1100; // Must be above sidebar
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.item {
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: var(--background-primary);
+  }
+} 

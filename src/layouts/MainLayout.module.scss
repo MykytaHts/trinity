@@ -1,0 +1,23 @@
+.appContainer {
+  display: flex;
+  height: 100vh;
+}
+
+.contentColumn {
+  flex-grow: 1; 
+  display: flex; 
+  flex-direction: column;
+  height: 100vh;
+}
+
+.mainContent {
+  flex-grow: 1;
+  padding: 32px 40px;
+  margin-left: 320px; // Corresponds to sidebar width
+  transition: margin-left 0.3s ease;
+  overflow-y: auto;
+
+  &.sidebarCollapsed {
+    margin-left: 80px; // Corresponds to --sidebar-width-collapsed
+  }
+} 

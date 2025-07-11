@@ -1,0 +1,72 @@
+.header {
+  height: 60px;
+  background-color: var(--background-secondary);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  width: 100%;
+  flex-shrink: 0;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.headerLeft {
+  flex: 1;
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  flex: 2;
+  gap: 24px;
+}
+
+.link {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: color 0.2s, background-color 0.2s;
+
+  &:hover {
+    color: var(--text-primary);
+  }
+}
+
+.activeLink {
+  composes: link;
+  color: var(--accent-text-primary);
+  background-image: var(--accent-gradient);
+
+  &:hover {
+    color: var(--accent-text-primary);
+  }
+}
+
+
+.headerControls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+  gap: 24px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 10px;
+
+  span {
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .icon {
+    color: var(--accent-secondary);
+  }
+} 

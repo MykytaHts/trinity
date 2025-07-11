@@ -1,0 +1,51 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+  transition: border-color 0.2s;
+}
+
+.navLink {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 1rem 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  width: 49%;
+  transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+  color: var(--text-primary);
+
+  &:hover {
+    border-color: var(--accent-primary); // Use main orange accent
+    
+    .title {
+      color: var(--accent-primary); // Title becomes orange
+    }
+  }
+
+  &.prev {
+    align-items: flex-start;
+  }
+
+  &.next {
+    align-items: flex-end;
+  }
+}
+
+.label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-weight: 500;
+  color: var(--text-primary); // Default text color
+  transition: color 0.2s; // Smooth transition for hover
+}
+
+.placeholder {
+  width: 49%;
+} 

@@ -1,0 +1,58 @@
+// Define variables for light and dark themes
+:root {
+  // Light Theme
+  --background-primary: #f7fafc;
+  --background-secondary: #ffffff;
+  --text-primary: #1a202c;
+  --text-secondary: #4a5568;
+  --border-color: #e2e8f0;
+
+  // Accents (NEW PALETTE: Purple Galaxy)
+  --accent-primary: #3f2c96;                  // Rich Purple (active item)
+  --accent-primary-darker: #1f1b79;              // Deep Indigo (sidebar bg)
+  --accent-primary-lighter: #604fab;             // Lighter Purple (hovers)
+  --accent-secondary: #3f2c96;                 // Re-using primary for borders for harmony
+  --accent-text-primary: #e0e7ff;              // Light Lavender text
+  --accent-gradient: linear-gradient(45deg, #3f2c96, #8e69bf); // Gradient for headers/buttons
+  --accent-vibrant: #16a34a;                   // Green for success
+}
+
+[data-theme='dark'] {
+  // Dark Theme
+  --background-primary: #18181b;
+  --background-secondary: #27272a;
+  --text-primary: #e4e4e7;
+  --text-secondary: #a1a1aa;
+  --border-color: #3f3f46;
+}
+
+
+// Reset
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// Base styles
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+} 
