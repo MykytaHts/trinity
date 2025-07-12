@@ -20,7 +20,14 @@ const LessonCatalogPage = () => {
       <h1 className={styles.title}>Все уроки</h1>
       <div className={styles.grid}>
         {paginatedLessons.map(lesson => (
-          <LessonCard key={lesson.id} lesson={lesson} />
+          <LessonCard 
+            key={lesson.id} 
+            id={lesson.id}
+            title={lesson.title}
+            description={lesson.description || ''}
+            status={lesson.status}
+            sectionsCount={lesson.sections.length}
+          />
         ))}
       </div>
       <Pagination

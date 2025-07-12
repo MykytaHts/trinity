@@ -4,36 +4,45 @@ import styles from './LessonCard.module.scss';
 import { FaStream } from 'react-icons/fa';
 import classNames from 'classnames';
 import { FiGrid } from 'react-icons/fi';
+import Label from '../Label/Label';
 
 interface LessonCardProps {
-  lesson: Lesson;
+  id: string;
+  title: string;
+  description: string;
+  status: LessonStatus;
+  sectionsCount: number;
 }
 
-const statusTextMap = {
-  not_started: 'Не начато',
+type LessonStatus = 'not_started' | 'in_progress' | 'completed';
+
+const statusTextMap: Record<LessonStatus, string> = {
+  not_started: 'Не начат',
   in_progress: 'В процессе',
-  completed: 'Завершено',
+  completed: 'Пройден',
 };
 
-const LessonCard = ({ lesson }: LessonCardProps) => {
+const LessonCard = ({ id, title, description, status, sectionsCount }: LessonCardProps) => {
   return (
-    <Link to={`/lessons/${lesson.id}`} className={styles.card}>
-      <div className={classNames(styles.statusLabel, styles[lesson.status])}>
-        {statusTextMap[lesson.status]}
-      </div>
+    <a href={`/lessons/${id}`} className={styles.card}>
+       {status !== 'not_started' && (
+        <Label variant={status} className={styles.statusLabel}>
+          {statusTextMap[status]}
+        </Label>
+      )}
       <div className={styles.content}>
-        <h3 className={styles.title}>{lesson.title}</h3>
-        {lesson.description && <p className={styles.description}>{lesson.description}</p>}
+        <h3 className={styles.title}>{title}</h3>
+        <p className={styles.description}>{description}</p>
         <div className={styles.footer}>
           <div className={styles.sections}>
             <FiGrid />
             <span>
-              {lesson.sections.length} {lesson.sections.length === 1 ? 'секция' : 'секций'}
+              {sectionsCount} {sectionsCount === 1 ? 'секция' : 'секций'}
             </span>
           </div>
         </div>
       </div>
-    </Link>
+    </a>
   );
 };
 

@@ -1,0 +1,58 @@
+.label {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+/* Difficulty Variants */
+.easy {
+  background-color: rgba(69, 172, 130, 0.15);
+  color: #45AC82;
+}
+.medium {
+  background-color: rgba(240, 173, 78, 0.15);
+  color: #f0ad4e;
+}
+.hard {
+  background-color: rgba(217, 83, 79, 0.15);
+  color: #d9534f;
+}
+
+/* Status Variants */
+.in_progress {
+  background-color: rgba(91, 192, 222, 0.15);
+  color: #5bc0de;
+}
+.completed {
+  background-color: rgba(69, 172, 130, 0.15);
+  color: #45AC82;
+}
+
+/* Dark theme glows */
+[data-theme='dark'] .label {
+  background-color: transparent;
+
+  &.easy {
+    color: #68d391;
+    box-shadow: 0 0 8px 0px rgba(104, 211, 145, 0.9);
+  }
+  &.medium {
+    color: #f6e05e;
+    box-shadow: 0 0 8px 0px rgba(246, 224, 94, 0.9);
+  }
+  &.hard {
+    color: #f56565;
+    box-shadow: 0 0 8px 0px rgba(245, 101, 101, 0.9);
+  }
+  &.in_progress {
+    color: #90cdf4;
+    box-shadow: 0 0 8px 0px rgba(144, 205, 244, 0.9);
+  }
+  &.completed {
+    color: #68d391;
+    box-shadow: 0 0 8px 0px rgba(104, 211, 145, 0.9);
+  }
+} 

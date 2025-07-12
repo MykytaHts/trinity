@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { lessons } from '../../data/lessons';
 import { Link } from 'react-router-dom';
 import type { Difficulty } from '../../types/homework';
+import Label from '../Label/Label';
 
 interface HomeworkCardProps {
   id: string;
@@ -44,7 +45,7 @@ const HomeworkCard = ({ id, title, description, status, lessonId, difficulty }: 
 
         <div className={styles.rightColumn}>
           <div className={styles.labelsContainer}>
-            <div className={classNames(styles.label, styles.difficultyLabel, styles[difficulty])}>{difficultyTextMap[difficulty]}</div>
+            <Label variant={difficulty}>{difficultyTextMap[difficulty]}</Label>
           </div>
           <Button as="link" to={`/homework/${id}`} variant="primary" className={styles.button}>
             <span>{status === 'completed' ? 'Повторить' : 'Начать'}</span>
