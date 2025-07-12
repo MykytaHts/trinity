@@ -1,3 +1,5 @@
+@import '../../styles/_mixins';
+
 .card {
   position: relative;
   background-color: var(--background-secondary);
@@ -16,6 +18,11 @@
   display: flex;
   justify-content: space-between;
   gap: 24px;
+
+  @include mobile {
+    flex-direction: column;
+    gap: 16px;
+  }
 }
 
 .leftColumn {
@@ -31,6 +38,15 @@
   flex-direction: column;
   align-items: flex-end;
   justify-content: space-between;
+
+  @include mobile {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 16px;
+    margin-top: 16px;
+  }
 }
 
 .labelsContainer {
@@ -38,6 +54,10 @@
   display: flex;
   gap: 8px;
   margin-bottom: 16px;
+
+  @include mobile {
+    margin-bottom: 0;
+  }
 }
 
 .content {
@@ -105,6 +125,10 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+
+  @include mobile {
+    margin-top: 0;
+  }
 }
 
 .buttonIcon {

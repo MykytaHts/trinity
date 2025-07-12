@@ -16,16 +16,17 @@
 .mainContent {
   flex-grow: 1;
   padding: 3rem;
-  margin-left: 320px; // Corresponds to sidebar width
+  margin-left: 330px; // Corresponds to sidebar width
   transition: margin-left 0.3s ease;
   overflow-y: auto;
 
-  @include mobile {
+  @include tablet {
     padding: 1.5rem;
+    margin-left: 0;
   }
 
   &.sidebarCollapsed {
-    margin-left: -200px;
+    margin-left: 80px; // Corresponds to collapsed sidebar width
   }
 } 
 

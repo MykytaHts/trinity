@@ -13,7 +13,7 @@
   border-right: 1px solid var(--accent-secondary);
   overflow: hidden;
 
-  @include mobile {
+  @include tablet {
     position: absolute;
     top: 0;
     left: 0;
@@ -41,7 +41,7 @@
 }
 
 .mobileOpen {
-  @include mobile {
+  @include tablet {
     transform: translateX(0);
   }
 }
@@ -55,7 +55,7 @@
   background-image: var(--accent-gradient);
   justify-content: space-between;
 
-  @include mobile {
+  @include tablet {
     background-image: none;
     background-color: var(--accent-primary-darker);
   }
@@ -71,7 +71,7 @@
   padding: 4px;
   line-height: 1;
 
-  @include mobile {
+  @include tablet {
     display: block;
   }
 }
@@ -250,7 +250,7 @@
   background-color: var(--accent-primary-darker);
 
   .toggleButtonWrapper {
-    @include mobile {
+    @include tablet {
       display: none;
     }
   }

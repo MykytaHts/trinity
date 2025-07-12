@@ -21,7 +21,7 @@ const MainLayout = () => {
   // Close mobile menu on resize
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 768) {
+      if (window.innerWidth > 1024) {
         setMobileMenuOpen(false);
       }
     };
