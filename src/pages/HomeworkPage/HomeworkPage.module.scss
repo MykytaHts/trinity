@@ -51,41 +51,10 @@
   line-height: 1.6;
 }
 
-.filterContainer {
+.controlsContainer {
   display: flex;
   gap: 12px;
   margin-bottom: 32px;
-}
-
-.filterButton {
-  background-color: var(--background-secondary);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-size: 1rem;
-
-  &:hover {
-    border-color: var(--accent-primary);
-    color: var(--text-primary);
-  }
-}
-
-.activeFilter {
-  background-color: var(--accent-primary);
-  border-color: var(--accent-primary);
-  color: var(--accent-text-primary);
-
-  &:hover {
-    color: var(--accent-text-primary);
-  }
-}
-
-[data-theme='dark'] .activeFilter {
-  box-shadow: 0 0 12px 0px var(--accent-primary);
 }
 
 .selectWrapper {
