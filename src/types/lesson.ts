@@ -7,6 +7,7 @@ export interface LessonSection {
 export interface Lesson {
   id: string;
   title: string;
+  description?: string; // Краткое описание для карточки урока
   // Возможно, красивая картинка в самом верху урока
   imageUrl?: string; 
   sections: LessonSection[];

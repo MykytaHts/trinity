@@ -4,6 +4,7 @@ import Sidebar from '../components/Sidebar';
 import { useState } from 'react';
 import styles from './MainLayout.module.scss';
 import classNames from 'classnames';
+import { ActiveSectionProvider } from '../context/ActiveSectionContext';
 
 const MainLayout = () => {
   const [isSidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -17,15 +18,17 @@ const MainLayout = () => {
   });
 
   return (
-    <div className={styles.appContainer}>
-      <Sidebar isCollapsed={isSidebarCollapsed} toggleSidebar={toggleSidebar} />
-      <div className={styles.contentColumn}>
-        <Header />
-        <main className={mainContentClasses}>
-          <Outlet />
-        </main>
+    <ActiveSectionProvider>
+      <div className={styles.appContainer}>
+        <Sidebar isCollapsed={isSidebarCollapsed} toggleSidebar={toggleSidebar} />
+        <div className={styles.contentColumn}>
+          <Header />
+          <main className={mainContentClasses}>
+            <Outlet />
+          </main>
+        </div>
       </div>
-    </div>
+    </ActiveSectionProvider>
   );
 };
 

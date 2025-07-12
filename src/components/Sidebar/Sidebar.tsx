@@ -2,8 +2,9 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import { FiGrid, FiBookOpen, FiChevronDown, FiChevronRight, FiCode, FiSettings, FiChevronLeft } from 'react-icons/fi';
 import { useState, useEffect } from 'react';
 import classNames from 'classnames';
-import { lessons } from '../../data/lessons'; // Adjusted path
+import { lessons } from '../../data/lessons';
 import styles from './Sidebar.module.scss';
+import { useActiveSection } from '../../context/ActiveSectionContext';
 
 interface SidebarProps {
   isCollapsed: boolean;
@@ -12,6 +13,7 @@ interface SidebarProps {
 
 const Sidebar = ({ isCollapsed, toggleSidebar }: SidebarProps) => {
   const location = useLocation();
+  const { activeSection } = useActiveSection();
   const [openLessonId, setOpenLessonId] = useState<string | null>(null);
 
   const lessonIdFromPath = location.pathname.split('/lessons/')[1]?.split('#')[0];
@@ -75,29 +77,22 @@ const Sidebar = ({ isCollapsed, toggleSidebar }: SidebarProps) => {
                   {!isCollapsed && <span className={styles.text}>{lesson.title}</span>}
                 </div>
                 {!isCollapsed && (isLessonOpen ? <FiChevronDown className={styles.chevron}/> : <FiChevronRight className={styles.chevron}/>)}
-            </div>
+              </div>
 
               <div className={classNames(styles.sectionMenu, {[styles.open]: !isCollapsed && isLessonOpen})}>
-                  <NavLink
-                    to={`/lessons/${lesson.id}`}
-                    className={({ isActive }) => classNames(styles.sectionLink, {
-                        [styles.activeSection]: isActive && location.hash === ''
-                    })}
-                    end
-                  >
-                    Обзор урока
-                  </NavLink>
-                  {lesson.sections.map(section => (
-                    <NavLink
-                      key={section.id}
-                      to={`/lessons/${lesson.id}#${section.id}`}
-                      className={classNames(styles.sectionLink, {
-                        [styles.activeSection]: location.hash === `#${section.id}`
-                      })}
-                    >
-                      {section.title}
-                    </NavLink>
-                  ))}
+                  {lesson.sections.map((section) => {
+                    return (
+                      <NavLink
+                        key={section.id}
+                        to={`/lessons/${lesson.id}#${section.id}`}
+                        className={classNames(styles.sectionLink, {
+                          [styles.activeSection]: activeSection === section.id,
+                        })}
+                      >
+                        {section.title}
+                      </NavLink>
+                    )
+                  })}
               </div>
             </div>
           );

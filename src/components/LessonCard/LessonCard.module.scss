@@ -14,6 +14,7 @@
   }
 }
 
+/*
 .imageContainer {
   height: 180px;
   background-color: var(--accent-primary-darker);
@@ -25,6 +26,7 @@
     object-fit: cover;
   }
 }
+*/
 
 .content {
   padding: 1.5rem;
@@ -41,8 +43,17 @@
   flex-grow: 1;
 }
 
+.description {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
 .footer {
-  margin-top: 1rem;
+  margin-top: auto; /* Прижимает футер к низу карточки */
+  padding-top: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
