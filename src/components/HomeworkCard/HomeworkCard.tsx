@@ -48,7 +48,7 @@ const HomeworkCard = ({ id, title, description, status, lessonId, difficulty }: 
           </div>
           <Button as="link" to={`/homework/${id}`} variant="primary" className={styles.button}>
             <span>{status === 'completed' ? 'Повторить' : 'Начать'}</span>
-            <FiArrowRight />
+            <FiArrowRight className={styles.buttonIcon} />
           </Button>
         </div>
       </div>
