@@ -69,6 +69,26 @@
   }
 }
 
+[data-theme='dark'] .card:hover {
+  box-shadow: 0 0 25px -5px var(--accent-primary);
+}
+
+[data-theme='dark'] .difficultyLabel {
+  background-color: transparent;
+  &.easy {
+    color: #68d391;
+    box-shadow: 0 0 8px 0px rgba(104, 211, 145, 0.9);
+  }
+  &.medium {
+    color: #f6e05e;
+    box-shadow: 0 0 8px 0px rgba(246, 224, 94, 0.9);
+  }
+  &.hard {
+    color: #f56565;
+    box-shadow: 0 0 8px 0px rgba(245, 101, 101, 0.9);
+  }
+}
+
 .content {
   flex-grow: 1;
 }
@@ -110,6 +130,14 @@
   svg {
     flex-shrink: 0;
     font-size: 1.2rem;
+  }
+}
+
+[data-theme='dark'] .lessonLink {
+  color: var(--accent-text-primary);
+
+  &:hover {
+    color: var(--accent-secondary);
   }
 }
 

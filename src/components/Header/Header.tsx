@@ -2,13 +2,34 @@ import { FaUserCircle } from 'react-icons/fa';
 import { Link, NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
 import ThemeToggle from '../ThemeToggle';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import ProfileDropdown from '../ProfileDropdown';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
+import { FiMaximize, FiMinimize } from 'react-icons/fi';
 
 const Header = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const handleFullscreenChange = () => {
+    setIsFullscreen(!!document.fullscreenElement);
+  };
+
+  useEffect(() => {
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
+  
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  };
 
   // Закрываем дропдаун при клике вне его области
   useOnClickOutside(dropdownRef, () => setDropdownOpen(false));
@@ -38,6 +59,9 @@ const Header = () => {
         </NavLink>
       </nav>
       <div className={styles.headerControls}>
+        <button className={styles.iconButton} onClick={toggleFullscreen}>
+          {isFullscreen ? <FiMinimize size={20} /> : <FiMaximize size={20} />}
+        </button>
         <ThemeToggle />
         <div ref={dropdownRef}>
           <div className={styles.profile} onClick={() => setDropdownOpen(o => !o)}>

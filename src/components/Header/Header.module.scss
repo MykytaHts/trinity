@@ -46,13 +46,35 @@
   }
 }
 
+[data-theme='dark'] .activeLink {
+  box-shadow: 0 0 12px 0px var(--accent-primary);
+}
+
 
 .headerControls {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   flex: 1;
-  gap: 24px;
+  gap: 16px;
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s;
+
+  &:hover {
+    color: var(--text-primary);
+    background-color: var(--background-tertiary, #f0f0f0);
+  }
 }
 
 .profile {

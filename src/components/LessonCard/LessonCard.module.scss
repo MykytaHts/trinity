@@ -17,6 +17,10 @@
   }
 }
 
+[data-theme='dark'] .card:hover {
+  box-shadow: 0 0 25px -5px var(--accent-primary);
+}
+
 .statusLabel {
   position: absolute;
   top: 12px;
@@ -36,6 +40,18 @@
   &.completed {
     background-color: rgba(69, 172, 130, 0.15);
     color: #45AC82;
+  }
+}
+
+[data-theme='dark'] .statusLabel {
+  background-color: transparent;
+  &.in_progress {
+    color: #90cdf4;
+    box-shadow: 0 0 8px 0px rgba(144, 205, 244, 0.9);
+  }
+  &.completed {
+    color: #68d391;
+    box-shadow: 0 0 8px 0px rgba(104, 211, 145, 0.9);
   }
 }
 

@@ -126,6 +126,11 @@
   }
 }
 
+.activeLessonGroup .sectionLink {
+  color: var(--accent-text-primary);
+  opacity: 1;
+}
+
 .menuItemContent {
   display: flex;
   align-items: center;
