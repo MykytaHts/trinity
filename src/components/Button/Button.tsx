@@ -8,6 +8,7 @@ type ButtonProps = {
   to?: string;
   variant?: 'primary' | 'secondary';
   className?: string;
+  disabled?: boolean;
 };
 
 const Button = ({
@@ -17,6 +18,7 @@ const Button = ({
   to = '/',
   variant = 'primary',
   className = '',
+  disabled = false,
 }: ButtonProps) => {
   const buttonClassName = `${styles.button} ${styles[variant]} ${className}`;
 
@@ -29,7 +31,7 @@ const Button = ({
   }
 
   return (
-    <button onClick={onClick} className={buttonClassName}>
+    <button onClick={onClick} className={buttonClassName} disabled={disabled}>
       {children}
     </button>
   );

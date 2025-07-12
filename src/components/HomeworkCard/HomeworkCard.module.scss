@@ -1,26 +1,47 @@
 .card {
-  display: flex;
-  flex-direction: column;
+  position: relative;
   background-color: var(--background-secondary);
   border-radius: 12px;
+  padding: 24px;
+  transition: all 0.2s ease-in-out;
   border: 1px solid var(--border-color);
-  transition: all 0.2s ease;
-  padding: 20px;
-  position: relative;
-  overflow: hidden;
-  height: 100%;
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(142, 105, 191, 0.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     border-color: var(--accent-primary);
   }
 }
 
-.statusLabel {
-  position: absolute;
-  top: 12px;
-  right: 12px;
+.cardBody {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.leftColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.rightColumn {
+  flex-shrink: 0;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.labelsContainer {
+  position: static;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.label {
   padding: 4px 8px;
   border-radius: 6px;
   font-size: 0.75rem;
@@ -28,26 +49,47 @@
   text-transform: uppercase;
 }
 
-.not_started .statusLabel {
-  background-color: var(--background-tertiary);
-  color: var(--text-secondary);
-}
-
 .completed .statusLabel {
   background-color: rgba(69, 172, 130, 0.15);
   color: #45AC82;
 }
 
+.difficultyLabel {
+  &.easy {
+    background-color: rgba(69, 172, 130, 0.15);
+    color: #45AC82;
+  }
+  &.medium {
+    background-color: rgba(240, 173, 78, 0.15);
+    color: #f0ad4e;
+  }
+  &.hard {
+    background-color: rgba(217, 83, 79, 0.15);
+    color: #d9534f;
+  }
+}
 
 .content {
   flex-grow: 1;
 }
 
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.completedIcon {
+  color: #45AC82;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
 .title {
   font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 8px;
-  padding-right: 80px; /* Space for status label */
+  padding-right: 0; /* Space for status label */
 }
 
 .lessonLink {
@@ -56,10 +98,10 @@
   gap: 8px;
   font-size: 1rem;
   color: var(--text-secondary);
-  margin-bottom: 16px; 
-  margin-top: 16px; 
   text-decoration: none;
   transition: color 0.2s;
+  margin-top: auto;
+  padding-top: 16px;
 
   &:hover {
     color: var(--accent-primary);
@@ -80,7 +122,7 @@
 
 .button {
   margin-top: 16px;
-  align-self: flex-start;
+  align-self: flex-end;
   display: inline-flex;
   align-items: center;
   gap: 8px;

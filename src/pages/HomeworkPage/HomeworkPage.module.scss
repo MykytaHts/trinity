@@ -1,5 +1,14 @@
 .container {
-  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 2rem;
+}
+
+.pageTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
 }
 
 .infoBlock {
@@ -42,12 +51,13 @@
 .filterButton {
   background-color: var(--background-secondary);
   border: 1px solid var(--border-color);
-  color: var(--text-secondary);
+  color: var(--text-primary);
   padding: 8px 16px;
   border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
+  font-size: 1rem;
 
   &:hover {
     border-color: var(--accent-primary);
@@ -58,15 +68,69 @@
 .activeFilter {
   background-color: var(--accent-primary);
   border-color: var(--accent-primary);
-  color: white;
+  color: var(--accent-text-primary);
 
   &:hover {
-    color: white;
+    color: var(--accent-text-primary);
   }
+}
+
+.selectWrapper {
+  position: relative;
+}
+
+.difficultySelect {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 8px 32px 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  font-size: 1rem;
+
+  &:hover {
+    border-color: var(--accent-primary);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 2px var(--accent-primary-lighter);
+  }
+}
+
+.selectWrapper::after {
+  content: '▼';
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
 .homeworkGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: 1fr;
   gap: 24px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.pageInfo {
+  color: var(--text-secondary);
+  font-weight: 500;
 } 

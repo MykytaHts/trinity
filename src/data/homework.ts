@@ -7,6 +7,7 @@ export const homeworkList: Homework[] = [
     title: 'Основы Rust: Переменные и типы',
     description: 'Практическое задание на закрепление знаний о переменных, мутабельности и базовых скалярных типах данных в Rust.',
     status: 'completed',
+    difficulty: 'easy',
   },
   {
     id: 'hw-ownership',
@@ -14,6 +15,7 @@ export const homeworkList: Homework[] = [
     title: 'Владение и заимствование',
     description: 'Решите несколько задач, связанных с концепциями владения, ссылок и заимствования, чтобы понять их на практике.',
     status: 'completed',
+    difficulty: 'medium',
   },
   {
     id: 'hw-structs-enums',
@@ -21,6 +23,7 @@ export const homeworkList: Homework[] = [
     title: 'Структуры и перечисления',
     description: 'Создайте свои собственные типы данных с помощью структур и перечислений, чтобы смоделировать реальную задачу.',
     status: 'not_started',
+    difficulty: 'medium',
   },
    {
     id: 'hw-error-handling',
@@ -28,5 +31,6 @@ export const homeworkList: Homework[] = [
     title: 'Обработка ошибок',
     description: 'Научитесь правильно обрабатывать возможные ошибки в коде с помощью Result и Option, чтобы писать надежные программы.',
     status: 'not_started',
+    difficulty: 'hard',
   }
 ]; 

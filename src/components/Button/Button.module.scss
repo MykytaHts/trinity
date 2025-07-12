@@ -22,6 +22,21 @@
     transform: translateY(0);
     box-shadow: none;
   }
+
+  &:disabled {
+    background-image: none;
+    background-color: var(--background-tertiary);
+    color: var(--text-secondary);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+
+    &:hover {
+      background-image: none;
+      background-color: var(--background-tertiary);
+      color: var(--text-secondary);
+    }
+  }
 }
 
 .primary {

@@ -1,8 +1,11 @@
+export type Difficulty = 'easy' | 'medium' | 'hard';
+
 export interface Homework {
   id: string;
   lessonId: string;
   title: string;
   description: string;
-  imageUrl?: string; // Keep optional for now
+  imageUrl?: string;
   status: 'completed' | 'not_started';
+  difficulty: Difficulty;
 } 
