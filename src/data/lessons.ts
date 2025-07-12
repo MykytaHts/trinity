@@ -4,6 +4,7 @@ export const lessons: Lesson[] = [
   {
     id: 'rust-basics',
     title: 'Введение в Rust',
+    status: 'completed',
     description: 'Узнайте, что такое Rust, как установить его и написать свою первую программу "Hello, World!".',
     imageUrl: 'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop',
     sections: [
@@ -40,8 +41,9 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: 'variables',
+    id: 'variables-and-data-types',
     title: 'Переменные и типы данных',
+    status: 'in_progress',
     description: 'Изучите основы работы с переменными, их изменяемостью и базовыми скалярными типами данных в Rust.',
     imageUrl: 'https://images.unsplash.com/photo-1502134249126-9f3755a50d78?q=80&w=2070&auto=format&fit=crop',
     sections: [
@@ -80,6 +82,7 @@ println!("The value of y is: {}", y);</code></pre>
   {
     id: 'ownership',
     title: 'Основные концепции: Владение и Заимствование',
+    status: 'not_started',
     description: 'Познакомьтесь с самой уникальной особенностью Rust — системой владения, которая гарантирует безопасность памяти.',
     imageUrl: 'https://images.unsplash.com/photo-1528642474498-1af0c17fd8c3?q=80&w=2069&auto=format&fit=crop',
     sections: [
@@ -123,6 +126,7 @@ fn calculate_length(s: &String) -> usize { // s - это ссылка на Strin
   {
     id: 'structs-enums',
     title: 'Структуры и Перечисления (Structs & Enums)',
+    status: 'not_started',
     description: 'Научитесь создавать собственные сложные типы данных с помощью структур и перечислений.',
     imageUrl: 'https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?q=80&w=1974&auto=format&fit=crop',
     sections: [
@@ -181,6 +185,7 @@ let loopback = IpAddr::V6(String::from("::1"));</code></pre>
   {
     id: 'error-handling',
     title: 'Обработка ошибок в Rust',
+    status: 'not_started',
     description: 'Изучите, как в Rust обрабатываются ошибки с помощью `Result<T, E>` для написания надежного кода.',
     imageUrl: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop',
     sections: [

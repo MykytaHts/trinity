@@ -6,6 +6,7 @@ import { FiInfo } from 'react-icons/fi';
 import classNames from 'classnames';
 import Button from '../../components/Button';
 import type { Difficulty } from '../../types/homework';
+import Pagination from '../../components/Pagination/Pagination';
 
 type FilterStatus = 'all' | 'completed';
 type DifficultyFilter = 'all' | Difficulty;
@@ -90,25 +91,11 @@ const HomeworkPage = () => {
         ))}
       </div>
       
-      {totalPages > 1 && (
-        <div className={styles.pagination}>
-          <Button 
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            Назад
-          </Button>
-          <span className={styles.pageInfo}>
-            Страница {currentPage} из {totalPages}
-          </span>
-          <Button 
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            Вперед
-          </Button>
-        </div>
-      )}
+      <Pagination 
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };

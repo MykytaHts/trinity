@@ -120,17 +120,4 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
-}
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  margin-top: 40px;
-}
-
-.pageInfo {
-  color: var(--text-secondary);
-  font-weight: 500;
 } 
