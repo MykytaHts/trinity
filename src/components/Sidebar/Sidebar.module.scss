@@ -1,15 +1,26 @@
+@import '../../styles/_mixins';
+
 .sidebar {
   width: 330px;
   background-color: var(--accent-primary-darker);
   color: var(--accent-text-primary);
   display: flex;
   flex-direction: column;
-  transition: width 0.3s ease-in-out;
+  transition: all 0.3s ease;
   position: fixed;
   height: 100%;
-  z-index: 1000;
+  z-index: 100;
   border-right: 1px solid var(--accent-secondary);
   overflow: hidden;
+
+  @include mobile {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    transform: translateX(-100%);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  }
 
   &.collapsed {
     width: 80px;
@@ -20,18 +31,48 @@
   }
 }
 
+.collapsed {
+  width: 80px;
+
+  .logoText, .text, .chevron {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.mobileOpen {
+  @include mobile {
+    transform: translateX(0);
+  }
+}
+
 .sidebarHeader {
-  padding: 0 24px;
   height: 70px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid var(--accent-secondary);
+  padding: 0 24px;
   flex-shrink: 0;
   background-image: var(--accent-gradient);
+  justify-content: space-between;
 
-  .sidebar.collapsed & {
-    padding: 0;
-    justify-content: center;
+  @include mobile {
+    background-image: none;
+    background-color: var(--accent-primary-darker);
+  }
+}
+
+.closeButton {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--accent-text-primary);
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+
+  @include mobile {
+    display: block;
   }
 }
 
@@ -207,6 +248,12 @@
   border-top: 1px solid var(--accent-secondary);
   flex-shrink: 0;
   background-color: var(--accent-primary-darker);
+
+  .toggleButtonWrapper {
+    @include mobile {
+      display: none;
+    }
+  }
 }
 
 .toggleButtonWrapper {

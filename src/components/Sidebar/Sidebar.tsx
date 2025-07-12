@@ -1,5 +1,5 @@
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { FiGrid, FiBookOpen, FiChevronDown, FiChevronRight, FiCode, FiSettings, FiChevronLeft } from 'react-icons/fi';
+import { FiGrid, FiBookOpen, FiChevronDown, FiChevronRight, FiCode, FiSettings, FiChevronLeft, FiX } from 'react-icons/fi';
 import { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { lessons } from '../../data/lessons';
@@ -9,9 +9,11 @@ import { useActiveSection } from '../../context/ActiveSectionContext';
 interface SidebarProps {
   isCollapsed: boolean;
   toggleSidebar: () => void;
+  isMobileOpen: boolean;
+  closeMobileMenu: () => void;
 }
 
-const Sidebar = ({ isCollapsed, toggleSidebar }: SidebarProps) => {
+const Sidebar = ({ isCollapsed, toggleSidebar, isMobileOpen, closeMobileMenu }: SidebarProps) => {
   const location = useLocation();
   const { activeSection } = useActiveSection();
   const [openLessonId, setOpenLessonId] = useState<string | null>(null);
@@ -30,6 +32,7 @@ const Sidebar = ({ isCollapsed, toggleSidebar }: SidebarProps) => {
 
   const sidebarClasses = classNames(styles.sidebar, {
     [styles.collapsed]: isCollapsed,
+    [styles.mobileOpen]: isMobileOpen,
   });
 
   const menuItemClasses = (isActive: boolean) => classNames(styles.menuItem, {
@@ -43,6 +46,9 @@ const Sidebar = ({ isCollapsed, toggleSidebar }: SidebarProps) => {
           <FiCode className={styles.logoIcon} />
           {!isCollapsed && <span className={styles.logoText}>Trinity</span>}
         </Link>
+        <button className={styles.closeButton} onClick={closeMobileMenu}>
+          <FiX />
+        </button>
       </div>
 
       <nav className={styles.nav}>

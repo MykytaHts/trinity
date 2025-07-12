@@ -5,9 +5,13 @@ import ThemeToggle from '../ThemeToggle';
 import { useState, useRef, useEffect } from 'react';
 import ProfileDropdown from '../ProfileDropdown';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
-import { FiMaximize, FiMinimize } from 'react-icons/fi';
+import { FiMaximize, FiMinimize, FiMenu } from 'react-icons/fi';
 
-const Header = () => {
+interface HeaderProps {
+  onToggleMobileMenu: () => void;
+}
+
+const Header = ({ onToggleMobileMenu }: HeaderProps) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -36,7 +40,11 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <div className={styles.headerLeft} />
+      <div className={styles.headerLeft}>
+        <button className={styles.menuButton} onClick={onToggleMobileMenu}>
+          <FiMenu />
+        </button>
+      </div>
       <nav className={styles.navigation}>
         <NavLink 
           to="/"

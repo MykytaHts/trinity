@@ -1,3 +1,5 @@
+@import '../../styles/_mixins';
+
 .header {
   height: 70px;
   background-color: var(--background-secondary);
@@ -15,11 +17,28 @@
   flex: 1;
 }
 
+.menuButton {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+
+  @include mobile {
+    display: block;
+  }
+}
+
 .navigation {
   display: flex;
   justify-content: center;
   flex: 2;
   gap: 24px;
+
+  @include mobile {
+    display: none;
+  }
 }
 
 .link {
