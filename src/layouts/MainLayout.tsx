@@ -30,7 +30,8 @@ const MainLayout = () => {
   }, []);
 
   const mainContentClasses = classNames(styles.mainContent, {
-    [styles.sidebarCollapsed]: isSidebarCollapsed,
+    [styles.sidebarCollapsed]: isSidebarCollapsed && !isMobileMenuOpen,
+    [styles.sidebarExpanded]: !isSidebarCollapsed && !isMobileMenuOpen,
   });
 
   return (

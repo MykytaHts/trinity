@@ -6,8 +6,8 @@
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   transition: background-color 0.2s;
-  max-width: 1100px; /* Ограничиваем ширину для лучшей читаемости */
-  margin: 0 auto; /* Центрируем контейнер */
+  /* max-width: 1100px;  УБИРАЕМ ЭТО. Контейнер должен быть гибким */
+  /* margin: 0 auto;  Больше не нужно, он и так займет все место */
 
   @include mobile {
     padding: 0;
@@ -39,12 +39,14 @@
 
 .section {
   margin-bottom: 2rem;
+  overflow-wrap: break-word; /* Добавляем здесь */
 
   h2 {
     font-size: 1.75rem;
     font-weight: 600;
     margin-bottom: 1rem;
     color: var(--accent-secondary);
+    // overflow-wrap: break-word; /* Можно и сюда, но лучше на родителя */
 
     @include mobile {
       font-size: 1.5rem;
@@ -58,7 +60,8 @@
     margin-bottom: 1rem;
     font-size: 1.1rem;
     color: var(--text-primary);
-    overflow-wrap: break-word;
+    /* Это свойство уже есть, но мы поднимем его на уровень выше для надежности */
+    // overflow-wrap: break-word; 
   }
   
   code {

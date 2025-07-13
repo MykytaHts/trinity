@@ -1,11 +1,12 @@
-import { FaUserCircle } from 'react-icons/fa';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
-import ThemeToggle from '../ThemeToggle';
-import { useState, useRef, useEffect } from 'react';
-import ProfileDropdown from '../ProfileDropdown';
+import ThemeToggle from '../ThemeToggle/ThemeToggle';
+import ProfileDropdown from '../ProfileDropdown/ProfileDropdown';
+import { FiMenu, FiCode, FiMaximize, FiMinimize } from 'react-icons/fi';
+import { FaUserCircle } from 'react-icons/fa';
+import { useState, useRef } from 'react';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
-import { FiMaximize, FiMinimize, FiMenu } from 'react-icons/fi';
+import classNames from 'classnames';
 
 interface HeaderProps {
   onToggleMobileMenu: () => void;
@@ -14,30 +15,21 @@ interface HeaderProps {
 const Header = ({ onToggleMobileMenu }: HeaderProps) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef(null);
+  useOnClickOutside(dropdownRef, () => setDropdownOpen(false));
 
-  const handleFullscreenChange = () => {
-    setIsFullscreen(!!document.fullscreenElement);
-  };
-
-  useEffect(() => {
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
-    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
-  }, []);
-  
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen();
+      setIsFullscreen(true);
     } else {
       if (document.exitFullscreen) {
         document.exitFullscreen();
+        setIsFullscreen(false);
       }
     }
   };
-
-  // Закрываем дропдаун при клике вне его области
-  useOnClickOutside(dropdownRef, () => setDropdownOpen(false));
-
+  
   return (
     <header className={styles.header}>
       <div className={styles.headerLeft}>
@@ -46,34 +38,30 @@ const Header = ({ onToggleMobileMenu }: HeaderProps) => {
         </button>
       </div>
       <nav className={styles.navigation}>
-        <NavLink 
-          to="/"
-          className={({isActive}) => isActive ? styles.activeLink : styles.link}
-          end
-        >
+        <NavLink to="/" className={({ isActive }) => isActive ? styles.activeLink : styles.link} end>
           Дашборд
         </NavLink>
-        <NavLink 
-          to="/lessons"
-          className={({isActive}) => isActive ? styles.activeLink : styles.link}
-        >
+        <NavLink to="/lessons" className={({ isActive }) => isActive ? styles.activeLink : styles.link}>
           Все уроки
         </NavLink>
-        <NavLink 
-          to="/homework"
-          className={({isActive}) => isActive ? styles.activeLink : styles.link}
-        >
+        <NavLink to="/homework" className={({ isActive }) => isActive ? styles.activeLink : styles.link}>
           Центр Заданий
         </NavLink>
       </nav>
+
+      <div className={styles.mobileLogo}>
+        <FiCode />
+        <span>Trinity</span>
+      </div>
+
       <div className={styles.headerControls}>
-        <button className={styles.iconButton} onClick={toggleFullscreen}>
-          {isFullscreen ? <FiMinimize size={20} /> : <FiMaximize size={20} />}
+        <button className={classNames(styles.iconButton, styles.fullscreenButton)} onClick={toggleFullscreen}>
+          {isFullscreen ? <FiMinimize size={22} /> : <FiMaximize size={22} />}
         </button>
         <ThemeToggle />
         <div ref={dropdownRef}>
           <div className={styles.profile} onClick={() => setDropdownOpen(o => !o)}>
-            <span>Mykyta Hotsii</span>
+            <span className={styles.profileName}>Mykyta Hotsii</span>
             <FaUserCircle size={24} className={styles.icon}/>
           </div>
           {isDropdownOpen && <ProfileDropdown />}
