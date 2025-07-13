@@ -6,8 +6,9 @@
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   transition: background-color 0.2s;
-  /* max-width: 1100px;  УБИРАЕМ ЭТО. Контейнер должен быть гибким */
-  /* margin: 0 auto;  Больше не нужно, он и так займет все место */
+  width: 100%; /* Занимать всю доступную ширину */
+  max-width: 1100px; /* Но не более 1100px */
+  margin: 0 auto; /* И центрироваться */
 
   @include mobile {
     padding: 0;

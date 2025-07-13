@@ -13,9 +13,6 @@ const LessonPage = () => {
   const { setActiveSection } = useActiveSection();
   const lesson = lessons.find(l => l.id === lessonId);
   
-  // This ref is no longer used for the observer logic but can be kept for other purposes if needed.
-  // For now, it's unused.
-  const activeIdRef = useRef<string | null>(null);
 
   // Effect for click: Immediately set the active section from the hash for instant feedback.
   useEffect(() => {

@@ -4,6 +4,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 1rem; /* Уменьшаем боковые отступы */
+  width: 100%; /* Для надежности */
 
   @include mobile {
     padding: 24px 1rem;
