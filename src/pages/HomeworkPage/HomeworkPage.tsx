@@ -2,13 +2,11 @@ import { useState } from 'react';
 import HomeworkCard from '../../components/HomeworkCard';
 import { homeworkList } from '../../data/homework';
 import styles from './HomeworkPage.module.scss';
-import { FiInfo } from 'react-icons/fi';
-import classNames from 'classnames';
-import Button from '../../components/Button';
 import type { Difficulty } from '../../types/homework';
 import Pagination from '../../components/Pagination/Pagination';
 import FilterGroup from '../../components/FilterGroup/FilterGroup';
 import type { FilterOption } from '../../components/FilterGroup/FilterGroup';
+import InfoBlock from '../../components/InfoBlock/InfoBlock';
 
 type StatusFilter = 'all' | 'completed';
 type DifficultyFilter = 'all' | Difficulty;
@@ -47,15 +45,15 @@ const HomeworkPage = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.pageTitle}>Центр Заданий</h1>
-      <div className={styles.infoBlock}>
-        <FiInfo className={styles.infoIcon} />
-        <div>
-          <h2 className={styles.title}>Добро пожаловать в Центр Заданий!</h2>
-          <p className={styles.subtitle}>
-            Здесь собраны все практические задания. Примените знания, полученные на уроках, чтобы отточить свои навыки программирования на Rust.
-          </p>
-        </div>
-      </div>
+      <InfoBlock 
+        id="homework-welcome" 
+        title="Добро пожаловать в Центр Заданий!"
+        className={styles.infoBlock}
+      >
+        <p>
+          Здесь собраны все практические задания. Примените знания, полученные на уроках, чтобы отточить свои навыки программирования на Rust.
+        </p>
+      </InfoBlock>
 
       <div className={styles.controlsContainer}>
         <FilterGroup

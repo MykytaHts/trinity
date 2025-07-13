@@ -17,46 +17,6 @@
   color: var(--text-primary);
 }
 
-.infoBlock {
-  display: flex;
-  align-items: flex-start;
-  gap: 24px;
-  background: linear-gradient(135deg, rgba(168, 126, 222, 0.05), rgba(132, 84, 184, 0.05));
-  border: 1px solid var(--border-color);
-  padding: 24px;
-  border-radius: 16px;
-  margin-bottom: 32px;
-}
-
-[data-theme='dark'] .infoBlock {
-  border-color: rgba(168, 126, 222, 0.2);
-  box-shadow: 0 0 20px 0px rgba(85, 60, 154, 0.3);
-}
-
-.infoIcon {
-  flex-shrink: 0;
-  color: var(--accent-primary);
-  font-size: 2rem;
-  margin-top: 4px;
-}
-
-[data-theme='dark'] .infoIcon {
-  color: var(--accent-secondary);
-}
-
-.title {
-  font-size: 1.25rem; // Matched to card title
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: var(--text-primary);
-}
-
-.subtitle {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
 .controlsContainer {
   display: flex;
   gap: 12px;
