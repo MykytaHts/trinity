@@ -37,6 +37,16 @@
   }
 }
 
+[data-theme='dark'] .navLink:hover {
+  border-color: var(--accent-secondary);
+  background-color: rgba(167, 139, 250, 0.1);
+  box-shadow: 0 0 24px 0px rgba(167, 139, 250, 0.2);
+
+  .title {
+    color: var(--accent-secondary);
+  }
+}
+
 .label {
   font-size: 0.8rem;
   color: var(--text-secondary);

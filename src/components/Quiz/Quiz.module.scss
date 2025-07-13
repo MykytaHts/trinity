@@ -2,12 +2,34 @@
 @import '../../styles/_mixins.scss';
 
 .quizContainer {
-  background-color: var(--background-primary);
+  background-color: var(--background-secondary); /* Новый фон для контраста */
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 2rem;
   margin-top: 3rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  //box-shadow: 0 4px 20px rgba($fallback-accent-primary, 0.15); /* Фиолетовая тень */
+}
+
+.quizHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.quizTitle {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.questionCounter {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--accent-text-primary);
+  background-image: var(--accent-gradient);
+  padding: 0.25rem 0.75rem;
+  border-radius: 8px; /* Уменьшаем радиус */
 }
 
 .questionContainer {
@@ -29,8 +51,8 @@
 }
 
 .optionItem {
-  background-color: var(--background-secondary);
-  border: 1px solid var(--border-color);
+  background-color: var(--background-primary); /* Белый фон для контраста с контейнером */
+  border: 1px solid var(--border-color); /* Оставляем тонкую рамку для цельности */
   border-radius: 8px;
   padding: 1rem 1.25rem;
   cursor: pointer;
@@ -39,12 +61,12 @@
 
   &:hover {
     border-color: var(--accent-primary);
-    background-color: rgba(var(--accent-primary-rgb), 0.05);
+    background-color: rgba($fallback-accent-primary, 0.05);
   }
 
   &.selected {
     border-color: var(--accent-primary);
-    background-color: rgba(var(--accent-primary-rgb), 0.1);
+    background-color: rgba($fallback-accent-primary, 0.1);
     color: var(--accent-primary);
     font-weight: 500;
   }
@@ -76,10 +98,11 @@
   margin-bottom: 1.5rem;
 
   span {
-    color: var(--text-secondary);
+    color: var(--accent-primary); /* Фиолетовый счетчик */
     font-size: 0.9rem;
-    margin-bottom: 0.5rem;
+    font-weight: 500; /* Делаем его чуть жирнее */
     display: block;
+    margin-bottom: 0.5rem;
   }
 
   h3 {
@@ -119,12 +142,216 @@
   button {
     @include button-reset;
     @include button-base;
-
-    &:disabled {
-      background-color: var(--background-tertiary);
-      color: var(--text-secondary);
-      cursor: not-allowed;
-      border-color: var(--border-color);
+    
+    /* Стиль для контурной кнопки "Назад" */
+    &:not(.primaryButton) {
+      background-color: transparent;
+      color: var(--accent-primary);
+      border: 1px solid var(--accent-primary);
+      
+      &:hover:not(:disabled) {
+        background-color: rgba(var(--accent-primary-rgb), 0.05);
+      }
     }
+
+    /* Общие стили для ВСЕХ неактивных кнопок */
+    &:disabled {
+      background-color: var(--background-tertiary) !important;
+      color: var(--text-secondary) !important;
+      border: 1px solid var(--border-color) !important;
+      cursor: not-allowed;
+      background-image: none !important;
+
+      &:hover {
+        background-color: var(--background-tertiary) !important;
+        color: var(--text-secondary) !important;
+        border-color: var(--border-color) !important;
+      }
+    }
+  }
+
+  .primaryButton {
+    background-image: var(--accent-gradient);
+    color: var(--accent-text-primary);
+    border: none;
+
+    &:hover {
+      color: var(--accent-text-primary);
+      border: none;
+    }
+  }
+} 
+
+[data-theme='dark'] {
+  .quizContainer {
+    box-shadow: 0 0 24px 0 rgba(167, 139, 250, 0.2);
+  }
+
+  .optionItem {
+    background-color: var(--background-secondary); // Светлее, чем фон квиза
+
+    &:hover {
+      border-color: var(--accent-secondary);
+      background-color: rgba(167, 139, 250, 0.1);
+    }
+
+    &.selected {
+      border-color: var(--accent-secondary);
+      background-color: rgba(167, 139, 250, 0.2);
+      color: var(--accent-secondary);
+    }
+  }
+
+  .questionHeader span {
+    color: var(--accent-secondary);
+  }
+
+  .navigation button:not(.primaryButton) {
+    color: var(--accent-secondary);
+    border-color: var(--accent-secondary);
+
+    &:hover:not(:disabled) {
+      background-color: rgba(167, 139, 250, 0.1);
+    }
+  }
+} 
+
+/* --- EKRAN S REZUL'TATAMI --- */
+@keyframes progress-animation {
+  from { --percentage: 0; }
+  to { --percentage: var(--percentage); }
+}
+
+.resultsContainer {
+  text-align: center;
+  padding: 3rem;
+}
+
+.resultsTitle {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.progressCircle {
+  --percentage: 0;
+  --primary: var(--accent-primary);
+  --secondary: var(--background-primary);
+  --size: 180px;
+  
+  animation: progress-animation 1s forwards;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 1.5rem;
+  background: 
+    radial-gradient(closest-side, var(--background-secondary) 84%, transparent 85% 100%),
+    conic-gradient(var(--primary) calc(var(--percentage) * 1%), var(--secondary) 0);
+}
+
+.progressValue {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.scoreText {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+}
+
+.resultsActions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.retryButton {
+  @include button-reset;
+  @include button-base;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: var(--accent-primary);
+  border: 1px solid var(--accent-primary);
+
+  &:hover {
+    background-color: var(--accent-primary);
+    color: var(--accent-text-primary);
+  }
+}
+
+.premiumFeature {
+  background: linear-gradient(45deg, rgba($fallback-accent-primary, 0.05), rgba($fallback-accent-primary, 0.15));
+  border: 1px solid rgba($fallback-accent-primary, 0.2);
+  padding: 2rem;
+  border-radius: 16px;
+  
+  p {
+    margin: 1rem 0 1.5rem;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+}
+
+.premiumHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+}
+
+.premiumButton {
+  @include button-reset;
+  @include button-base;
+  gap: 0.5rem;
+  width: 100%;
+  background-image: var(--accent-gradient);
+  color: var(--accent-text-primary);
+  border: none;
+}
+
+[data-theme='dark'] {
+  .resultsContainer {
+    .progressCircle {
+      --primary: var(--accent-secondary);
+      --secondary: var(--background-primary); /* Исправляем цвет фона трека */
+      background:
+        radial-gradient(closest-side, var(--background-secondary) 84%, transparent 85% 100%),
+        conic-gradient(var(--primary) calc(var(--percentage) * 1%), var(--secondary) 0);
+    }
+  }
+
+  .premiumFeature {
+    background: linear-gradient(45deg, rgba(167, 139, 250, 0.1), rgba(167, 139, 250, 0.2));
+    border: 1px solid rgba(167, 139, 250, 0.3);
+  }
+
+  .premiumHeader {
+    color: var(--accent-secondary);
+  }
+
+  .retryButton {
+    color: var(--accent-secondary);
+    border-color: var(--accent-secondary);
+
+    &:hover {
+      background-color: var(--accent-secondary);
+      color: var(--background-primary);
+    }
+  }
+
+  .scoreText,
+  .premiumFeature p {
+    color: var(--text-primary);
   }
 } 

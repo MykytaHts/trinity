@@ -149,4 +149,9 @@
   100% {
     transform: translateX(0);
   }
+}
+
+[data-theme='dark'] .card:hover {
+  border-color: var(--accent-secondary);
+  box-shadow: 0 0 24px 0px rgba(167, 139, 250, 0.2);
 } 
