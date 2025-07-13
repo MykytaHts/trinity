@@ -3,7 +3,11 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 2rem;
+  padding: 40px 1rem; /* Уменьшаем боковые отступы */
+
+  @include mobile {
+    padding: 24px 1rem;
+  }
 }
 
 .pageTitle {

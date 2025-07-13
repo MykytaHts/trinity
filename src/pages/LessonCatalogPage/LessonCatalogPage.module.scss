@@ -5,7 +5,8 @@
   flex-direction: column;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  /* Убираем padding отсюда, чтобы он не конфликтовал с grid */
+  /* padding: 0 2rem; */
 }
 
 .title {
@@ -13,10 +14,12 @@
   font-weight: 700;
   margin-bottom: 2rem;
   color: var(--text-primary);
+  padding: 0 1rem; /* Добавляем отступ к заголовку отдельно */
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
+  padding: 0 1rem; /* Добавляем padding сюда */
 } 
