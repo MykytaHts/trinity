@@ -3,8 +3,8 @@
 .toggleSwitch {
   position: relative;
   display: inline-block;
-  width: 70px;
-  height: 38px;
+  width: 60px; // Уменьшил ширину
+  height: 34px; // Уменьшил высоту
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -26,7 +26,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba($fallback-accent-primary, 0.2); // Cool purple background
+  background-color: #d1c4e9; // Более темный и насыщенный фиолетовый
   transition: .4s;
   border-radius: 34px;
 }
@@ -34,17 +34,17 @@
 .handle {
   position: absolute;
   content: "";
-  height: 30px;
-  width: 30px;
+  height: 26px; // Уменьшил высоту
+  width: 26px; // Уменьшил ширину
   left: 4px;
   bottom: 4px;
-  background-color: $fallback-accent-primary; /* Теперь солнце фиолетовое */
+  background-color: #673ab7; // Насыщенный фиолетовый для солнца
   transition: .4s;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 14px 4px rgba($fallback-accent-primary, 0.5); /* Фиолетовое свечение солнца */
+ // box-shadow: 0 0 14px 4px rgba($fallback-accent-primary, 0.5); /* Фиолетовое свечение солнца */
 }
 
 input:checked + .slider {
@@ -52,13 +52,13 @@ input:checked + .slider {
 }
 
 input:checked + .slider .handle {
-  transform: translateX(32px);
+  transform: translateX(26px); // Скорректировал сдвиг
   background-color: #e0e7ff; // Moon silver
   box-shadow: none;
 }
 
 .sun, .moon {
-  font-size: 18px;
+  font-size: 20px; // Уменьшил иконки
   transition: opacity 0.4s, transform 0.4s;
 }
 

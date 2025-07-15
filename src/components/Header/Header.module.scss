@@ -93,12 +93,6 @@
   gap: 16px;
 }
 
-.fullscreenButton {
-  @include tablet {
-    display: none !important;
-  }
-}
-
 .profileName {
   @include tablet {
     display: none !important;
@@ -120,6 +114,27 @@
   &:hover {
     color: var(--text-primary);
     background-color: var(--background-tertiary, #f0f0f0);
+  }
+}
+
+.fullscreenButton {
+  color: var(--accent-primary);
+
+  &:hover {
+    color: var(--accent-primary-darker);
+  }
+
+  @include tablet {
+    display: none !important;
+  }
+}
+
+[data-theme='dark'] .fullscreenButton {
+  color: #a78bfa;
+
+  &:hover {
+    color: #c7a4ff;
+    background-color: rgba(199, 164, 255, 0.15);
   }
 }
 
