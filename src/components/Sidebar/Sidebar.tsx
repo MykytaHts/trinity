@@ -1,4 +1,4 @@
-import { NavLink, Link, useParams, useLocation } from 'react-router-dom';
+import { NavLink, Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import { FiGrid, FiCode, FiSettings, FiChevronLeft, FiChevronRight, FiX, FiCheckSquare, FiClipboard, FiBookOpen } from 'react-icons/fi';
 import classNames from 'classnames';
 import styles from './Sidebar.module.scss';
@@ -16,6 +16,7 @@ interface SidebarProps {
 const Sidebar = ({ isCollapsed, toggleSidebar, isMobileOpen, closeMobileMenu }: SidebarProps) => {
   const params = useParams<{ courseId?: string; sectionId?: string; lessonId?: string }>();
   const location = useLocation();
+  const navigate = useNavigate();
   const { activeSubSection } = useActiveSubSection();
 
   const handleSubSectionClick = (e: MouseEvent<HTMLAnchorElement>, subId: string) => {
@@ -40,15 +41,18 @@ const Sidebar = ({ isCollapsed, toggleSidebar, isMobileOpen, closeMobileMenu }: 
     [styles.active]: isActive,
   });
 
-  const renderContextualNav = () => {
-    if (isCollapsed) return null;
-
-    // On a specific course page, show its sections
-    if (params.courseId && !params.sectionId) {
-      const courseSections = sections.filter(s => s.courseId === params.courseId);
-      return (
-        <div className={styles.contextualNav}>
-          {courseSections.map(section => (
+  const renderDefaultNav = () => (
+    <>
+      <NavLink to="/courses" className={({ isActive }) => classNames(styles.menuItem, { [styles.active]: isActive || location.pathname.startsWith('/courses') })} end>
+        <div className={styles.menuItemContent}>
+          <FiGrid className={styles.icon} />
+          {!isCollapsed && <span className={styles.text}>Курсы</span>}
+        </div>
+      </NavLink>
+      {/* On a specific course page, show its sections under the main link */}
+      {params.courseId && !params.sectionId && !isCollapsed && (
+         <div className={styles.contextualNav}>
+          {sections.filter(s => s.courseId === params.courseId).map(section => (
             <NavLink
               key={section.id}
               to={`/courses/${params.courseId}/${section.id}`}
@@ -58,50 +62,79 @@ const Sidebar = ({ isCollapsed, toggleSidebar, isMobileOpen, closeMobileMenu }: 
             </NavLink>
           ))}
         </div>
-      );
-    }
+      )}
+      <NavLink to="/homework" className={({ isActive }) => classNames(styles.menuItem, { [styles.active]: isActive })} end>
+        <div className={styles.menuItemContent}>
+          <FiCheckSquare className={styles.icon} />
+          {!isCollapsed && <span className={styles.text}>Домашки</span>}
+        </div>
+      </NavLink>
+      <NavLink to="/tests" className={({ isActive }) => classNames(styles.menuItem, { [styles.active]: isActive })} end>
+        <div className={styles.menuItemContent}>
+          <FiClipboard className={styles.icon} />
+          {!isCollapsed && <span className={styles.text}>Тесты</span>}
+        </div>
+      </NavLink>
+    </>
+  );
 
-    // On a specific section or lesson page, show lessons of that section
-    if (params.courseId && params.sectionId) {
-      const sectionLessons = lessons.filter(l => l.sectionId === params.sectionId);
-      return (
-        <div className={styles.contextualNav}>
+  const renderSectionNav = () => {
+    if (!params.courseId || !params.sectionId) return null;
+
+    const currentSection = sections.find(s => s.id === params.sectionId);
+    const sectionLessons = lessons.filter(l => l.sectionId === params.sectionId);
+
+    if (!currentSection) return null;
+
+    return (
+      <>
+        <div className={styles.sectionHeader}>
+          {!isCollapsed && (
+            <button 
+              className={styles.backButton} 
+              onClick={() => navigate(`/courses/${params.courseId}`)}
+              title="Назад к списку секций"
+            >
+              <FiChevronLeft />
+            </button>
+          )}
+          {!isCollapsed && <h3 className={styles.sectionTitle}>{currentSection.title}</h3>}
+        </div>
+        <div className={styles.scrollableNav}>
           {sectionLessons.map(lesson => {
             const isLessonActive = params.lessonId === lesson.id;
             return (
-              <div key={lesson.id}>
+              <div key={lesson.id} className={styles.lessonGroup}>
                 <NavLink
                   to={`/courses/${params.courseId}/${params.sectionId}/${lesson.id}`}
-                  className={() => classNames(styles.contextualLink, { [styles.active]: isLessonActive })}
+                  className={({ isActive }) => classNames(styles.menuItem, { [styles.activeLessonLink]: isActive })}
                 >
-                  <FiBookOpen size={14} />
-                  <span>{lesson.title}</span>
+                  <div className={styles.menuItemContent}>
+                    <FiBookOpen className={styles.icon} />
+                    {!isCollapsed && <span className={styles.text}>{lesson.title}</span>}
+                  </div>
                 </NavLink>
-                {isLessonActive && !isCollapsed && lesson.subSections.length > 0 && (
-                  <ul className={styles.subSectionList}>
-                    {lesson.subSections.map(sub => (
-                      <li key={sub.id} className={styles.subSectionItem}>
-                        <a 
-                          href={`#${sub.id}`}
-                          onClick={(e) => handleSubSectionClick(e, sub.id)}
-                          className={classNames(styles.subSectionLink, {
-                            [styles.activeSubSection]: activeSubSection === sub.id
-                          })}
-                        >
-                          {sub.title}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                <ul className={classNames(styles.subSectionList, { [styles.collapsed]: !isLessonActive || isCollapsed })}>
+                  {lesson.subSections.map(sub => (
+                    <li key={sub.id} className={styles.subSectionItem}>
+                      <a 
+                        href={`#${sub.id}`}
+                        onClick={(e) => handleSubSectionClick(e, sub.id)}
+                        className={classNames(styles.subSectionLink, {
+                          [styles.activeSubSection]: activeSubSection === sub.id
+                        })}
+                      >
+                        {sub.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
             );
           })}
         </div>
-      );
-    }
-
-    return null;
+      </>
+    );
   };
 
   return (
@@ -117,25 +150,7 @@ const Sidebar = ({ isCollapsed, toggleSidebar, isMobileOpen, closeMobileMenu }: 
       </div>
 
       <nav className={styles.nav}>
-        <NavLink to="/courses" className={({ isActive }) => menuItemClasses(location.pathname.startsWith('/courses') || isActive)} end>
-          <div className={styles.menuItemContent}>
-            <FiGrid className={styles.icon} />
-            {!isCollapsed && <span className={styles.text}>Курсы</span>}
-          </div>
-        </NavLink>
-        {renderContextualNav()}
-        <NavLink to="/homework" className={({ isActive }) => menuItemClasses(isActive)} end>
-          <div className={styles.menuItemContent}>
-            <FiCheckSquare className={styles.icon} />
-            {!isCollapsed && <span className={styles.text}>Домашки</span>}
-          </div>
-        </NavLink>
-        <NavLink to="/tests" className={({ isActive }) => menuItemClasses(isActive)} end>
-          <div className={styles.menuItemContent}>
-            <FiClipboard className={styles.icon} />
-            {!isCollapsed && <span className={styles.text}>Тесты</span>}
-          </div>
-        </NavLink>
+        {params.sectionId ? renderSectionNav() : renderDefaultNav()}
       </nav>
 
       <div className={styles.sidebarFooter}>
