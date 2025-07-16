@@ -41,8 +41,8 @@ const Header = ({ onToggleMobileMenu }: HeaderProps) => {
         <NavLink to="/" className={({ isActive }) => isActive ? styles.activeLink : styles.link} end>
           Дашборд
         </NavLink>
-        <NavLink to="/lessons" className={({ isActive }) => isActive ? styles.activeLink : styles.link}>
-          Все уроки
+        <NavLink to="/courses" className={({ isActive }) => isActive ? styles.activeLink : styles.link}>
+          Курсы
         </NavLink>
         <NavLink to="/homework" className={({ isActive }) => isActive ? styles.activeLink : styles.link}>
           Центр Заданий

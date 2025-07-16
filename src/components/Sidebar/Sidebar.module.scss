@@ -232,6 +232,40 @@
   }
 }
 
+.subSectionList {
+  padding-left: 16px;
+  margin-top: 8px;
+  list-style-type: none;
+}
+
+.subSectionItem {
+  margin-bottom: 4px;
+}
+
+.subSectionLink {
+  display: block;
+  padding: 6px 16px;
+  font-size: 14px;
+  text-decoration: none;
+  border-radius: 4px;
+  color: var(--accent-text-primary);
+  opacity: 0.7;
+  transition: all 0.2s;
+
+  &.activeSubSection {
+    color: #a78bfa; // More vibrant accent for active subsection in dark theme
+    font-weight: 600;
+    opacity: 1;
+    transform: translateX(4px);
+  }
+
+  &:hover:not(.activeSubSection) {
+    background-color: var(--accent-primary-lighter);
+    color: var(--accent-text-primary);
+    opacity: 1;
+  }
+}
+
 .sidebarFooter {
   padding: 0;
   border-top: 1px solid var(--accent-secondary);
@@ -268,5 +302,40 @@
 
   .sidebar.collapsed & {
     padding: 16px 0;
+  }
+} 
+
+.contextualNav {
+  margin: 8px 12px 12px;
+  padding-left: 16px;
+  margin-left: 12px;
+  border-left: 1px solid var(--accent-secondary);
+}
+
+.contextualLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  color: var(--accent-text-primary);
+  opacity: 0.8;
+  font-size: 15px;
+  text-decoration: none;
+  font-weight: 500;
+  line-height: 1.4;
+  transition: all 0.2s;
+
+  &:hover {
+    color: var(--accent-text-primary);
+    background-color: var(--accent-primary-lighter);
+    opacity: 1;
+  }
+
+  &.active {
+    color: var(--accent-text-primary);
+    background-color: var(--accent-primary);
+    font-weight: 600;
+    opacity: 1;
   }
 } 

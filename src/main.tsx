@@ -5,12 +5,15 @@ import App from './App.tsx'
 import './index.css'
 import './styles/global.scss'
 import { ThemeProvider } from './context/ThemeContext.tsx'
+import { ActiveSubSectionProvider } from './context/ActiveSubSectionContext.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider>
-        <App />
+        <ActiveSubSectionProvider>
+          <App />
+        </ActiveSubSectionProvider>
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>,

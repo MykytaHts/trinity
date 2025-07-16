@@ -1,0 +1,22 @@
+.container {
+  padding: 40px;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.description {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 800px;
+  margin-bottom: 40px;
+}
+
+.sectionsList {
+  display: grid;
+  gap: 20px;
+} 

@@ -1,48 +1,30 @@
 import { Link } from 'react-router-dom';
-import type { Lesson } from '../../types/lesson';
+import type { Lesson } from '../../data/courses';
 import styles from './LessonCard.module.scss';
-import { FaStream } from 'react-icons/fa';
-import classNames from 'classnames';
-import { FiGrid } from 'react-icons/fi';
-import Label from '../Label/Label';
+import { FiClock } from 'react-icons/fi';
 
 interface LessonCardProps {
-  id: string;
-  title: string;
-  description: string;
-  status: LessonStatus;
-  sectionsCount: number;
+  lesson: Lesson;
+  courseId: string;
+  sectionId: string;
 }
 
-type LessonStatus = 'not_started' | 'in_progress' | 'completed';
+const LessonCard = ({ lesson, courseId, sectionId }: LessonCardProps) => {
+  const durationInMinutes = Math.ceil(lesson.duration / 60);
 
-const statusTextMap: Record<LessonStatus, string> = {
-  not_started: 'Не начат',
-  in_progress: 'В процессе',
-  completed: 'Пройден',
-};
-
-const LessonCard = ({ id, title, description, status, sectionsCount }: LessonCardProps) => {
   return (
-    <a href={`/lessons/${id}`} className={styles.card}>
-       {status !== 'not_started' && (
-        <Label variant={status} className={styles.statusLabel}>
-          {statusTextMap[status]}
-        </Label>
-      )}
+    <Link to={`/courses/${courseId}/${sectionId}/${lesson.id}`} className={styles.card}>
       <div className={styles.content}>
-        <h3 className={styles.title}>{title}</h3>
-        <p className={styles.description}>{description}</p>
+        <h3 className={styles.title}>{lesson.title}</h3>
+        <p className={styles.description}>{lesson.description}</p>
         <div className={styles.footer}>
-          <div className={styles.sections}>
-            <FiGrid />
-            <span>
-              {sectionsCount} {sectionsCount === 1 ? 'секция' : 'секций'}
-            </span>
+          <div className={styles.duration}>
+            <FiClock />
+            <span>{durationInMinutes} мин.</span>
           </div>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 

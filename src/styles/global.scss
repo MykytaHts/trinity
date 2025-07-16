@@ -7,7 +7,7 @@
   --text-secondary: #4a5568;
   --border-color: #e2e8f0;
 
-  // Accents (NEW PALETTE: Purple Galaxy)
+  // Accents (Original "Purple Galaxy")
   --accent-primary: #3f2c96;                  // Rich Purple (active item)
   --accent-primary-darker: #1f1b79;              // Deep Indigo (sidebar bg)
   --accent-primary-lighter: #604fab;             // Lighter Purple (hovers)
@@ -18,20 +18,20 @@
 }
 
 [data-theme='dark'] {
-  // Dark Theme - New Palette: "Midnight Slate"
+  // Dark Theme
   --background-primary: #1e293b;
   --background-secondary: #2b344d;
   --text-primary: #f1f5f9;
   --text-secondary: #94a3b8;
   --border-color: #3e4c63;
 
-  // Overriding accents for dark theme for better contrast
-  --accent-primary: #553c9a;                   // Deeper, less saturated purple
-  --accent-secondary: #a78bfa;                 // Keep profile icon bright
+  // Overriding accents for dark theme for better contrast & different feel
+  --accent-primary: #553c9a;
+  --accent-secondary: #a78bfa;
   --accent-primary-darker: #2b344d;
-  --accent-primary-lighter: #6b46c1;             // Deeper, less saturated purple for hovers
-  // --accent-text-primary is intentionally not overridden to stay light
-  --accent-gradient: linear-gradient(45deg, #553c9a, #805AD5); // Darker, more subdued gradient
+  --accent-primary-lighter: #6b46c1;
+  --accent-text-primary: #e0e7ff; // Keep text light
+  --accent-gradient: linear-gradient(45deg, #553c9a, #805AD5);
 }
 
 
