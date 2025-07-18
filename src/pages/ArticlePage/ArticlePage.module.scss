@@ -1,0 +1,105 @@
+.container {
+  max-width: 1024px;
+  margin: 2rem auto;
+  padding: 3rem;
+  background-color: var(--background-secondary);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-primary);
+}
+
+.articleHeader {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem 1rem;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    background-color: var(--background-primary);
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+}
+
+.meta {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.articleContent {
+  line-height: 1.7;
+  font-size: 1.1rem;
+
+  h1, h2, h3 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+    font-weight: 600;
+  }
+
+  p {
+    margin-bottom: 1.25em;
+  }
+
+  ul, ol {
+    margin-bottom: 1.25em;
+    padding-left: 1.5em;
+  }
+
+  blockquote {
+    border-left: 3px solid var(--accent-primary);
+    margin-left: 0;
+    padding-left: 1.5em;
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+}
+
+.copyButton {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: #4f5b6a;
+  border: none;
+  border-radius: 0.25rem;
+  color: white;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.notFound {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: var(--secondary-background-color);
+  border-radius: 8px;
+  
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    margin-bottom: 2rem;
+    color: var(--muted-text-color);
+  }
+} 

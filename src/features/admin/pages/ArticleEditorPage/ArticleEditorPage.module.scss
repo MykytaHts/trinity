@@ -1,0 +1,140 @@
+.container {
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-shrink: 0;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+}
+
+.saveButton {
+  background-color: #4f46e5;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 1rem;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #4338ca;
+  }
+}
+
+.editorContainer {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: var(--secondary-background-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* To contain the editor */
+}
+
+.title {
+  margin-bottom: 1rem;
+}
+
+.titleWrapper {
+  margin-bottom: 1.5rem;
+}
+
+.titleLabel {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #374151;
+}
+
+.titleInput {
+  font-size: 1rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  
+  &::placeholder {
+    color: #9ca3af;
+    font-weight: normal;
+  }
+}
+
+.authorInput {
+  font-size: 1rem;
+  width: 50%;
+}
+
+.editorWrapper {
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  padding: 1rem;
+}
+
+.bubbleMenu {
+  display: flex;
+  background-color: #333;
+  color: white;
+  padding: 0.2rem;
+  border-radius: 0.5rem;
+  
+  button {
+    border: none;
+    background: none;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0 0.4rem;
+    opacity: 0.6;
+    
+    &:hover,
+    &.isActive {
+      opacity: 1;
+    }
+  }
+}
+
+.editorContent {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  max-height: 600px;
+  overflow-y: auto;
+  resize: vertical;
+
+  :global {
+    .ProseMirror {
+      min-height: 200px;
+    }
+
+    .ProseMirror-focused {
+      outline: none;
+    }
+
+    ul, ol {
+      padding-left: 2rem;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+  }
+} 

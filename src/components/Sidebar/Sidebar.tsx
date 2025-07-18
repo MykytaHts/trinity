@@ -75,6 +75,18 @@ const Sidebar = ({ isCollapsed, toggleSidebar, isMobileOpen, closeMobileMenu }: 
           {!isCollapsed && <span className={styles.text}>Тесты</span>}
         </div>
       </NavLink>
+      <NavLink to="/articles" className={({ isActive }) => classNames(styles.menuItem, { [styles.active]: isActive || location.pathname.startsWith('/articles') })} end>
+        <div className={styles.menuItemContent}>
+          <FiBookOpen className={styles.icon} />
+          {!isCollapsed && <span className={styles.text}>Статьи</span>}
+        </div>
+      </NavLink>
+      <NavLink to="/admin/articles" className={({ isActive }) => classNames(styles.menuItem, { [styles.active]: isActive })} end>
+        <div className={styles.menuItemContent}>
+          <FiSettings className={styles.icon} />
+          {!isCollapsed && <span className={styles.text}>Админка</span>}
+        </div>
+      </NavLink>
     </>
   );
 

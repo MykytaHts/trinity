@@ -1,0 +1,59 @@
+.codeBlock {
+  background: #2d2d2d;
+  border: 1px solid #444;
+  border-radius: 0.75rem;
+  margin: 1.5rem 0;
+  overflow: hidden; /* Ensures the border-radius is respected by children */
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #3a3a3a;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #444;
+}
+
+.language {
+  font-family: sans-serif;
+  color: #ccc;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.copyButton {
+  background: none;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.25rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s, background-color 0.2s;
+
+  &:hover {
+    color: white;
+    background-color: #555;
+  }
+}
+
+.codeBlock pre {
+  background: #2d2d2d !important;
+  margin: 0;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  overflow-x: auto;
+}
+
+.codeBlock code {
+  color: #f8f8f2 !important;
+  display: block;
+  background: none !important; /* Override highlight.js background */
+  font-size: 0.95rem;
+  line-height: 1.5;
+  padding: 0;
+  white-space: pre !important; /* Override Tiptap's inline style */
+}
