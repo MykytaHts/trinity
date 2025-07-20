@@ -1,7 +1,7 @@
 @import '../../styles/_mixins';
 
 .sidebar {
-  width: 330px;
+  width: 280px;
   background-color: var(--accent-primary-darker);
   color: var(--accent-text-primary);
   display: flex;
@@ -21,12 +21,12 @@
   }
 
   &.collapsed {
-    width: 80px;
+    width: 90px;
   }
 }
 
 .collapsed {
-  width: 80px;
+  width: 90px;
 
   .logoText, .text, .chevron {
     opacity: 0;
@@ -104,11 +104,19 @@
 .nav {
   flex-grow: 1;
   overflow-y: auto;
-  padding: 8px 0;
+  padding: 16px;
+}
+
+.navGroup {
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(224, 231, 255, 0.2);
+  }
 }
 
 .lessonGroup {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   transition: background-color 0.2s ease-in-out;
   border-radius: 8px;
   margin: 0 8px 8px 8px;
@@ -133,15 +141,16 @@
   cursor: pointer;
   user-select: none;
   transition: background-color 0.2s;
-
-  &.active {
-    background-color: transparent;
-    color: var(--accent-text-primary);
-    font-weight: 600;
-  }
+  border-radius: 8px;
+  margin-bottom: 4px;
 
   &:hover:not(.active) {
-    background-color: transparent;
+    background-color: var(--accent-primary-lighter);
+  }
+
+  &.active {
+    background-color: var(--accent-primary-lighter);
+    font-weight: 600;
   }
 
   .sidebar.collapsed & {
@@ -154,7 +163,7 @@
   border-radius: 8px;
 
   &:hover {
-    background-color: var(--accent-primary-lighter);
+    background-color: var(--accent-primary-lighter) !important;
   }
 
   .icon, .text {
@@ -237,66 +246,65 @@
   list-style-type: none;
   overflow: hidden;
   padding-left: 16px;
-  margin-top: 8px; /* Reverted to smaller margin */
-  
-  /* Animate the container height */
-  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  max-height: 500px; /* Define the expanded state height */
+  margin: 8px 0 8px 20px;
+  border-left: 1px solid var(--accent-primary-lighter);
+  max-height: 1000px; /* Needs to be large enough for all content */
+  transition: all 0.4s ease-in-out;
 
   &.collapsed {
     max-height: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-color: transparent;
   }
 }
 
 .subSectionItem {
-  margin-bottom: 10px; /* Increased spacing between items */
+  margin-bottom: 4px;
 }
 
 .subSectionLink {
   display: block;
-  padding: 6px 16px;
+  padding: 8px 12px;
   font-size: 14px;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 6px;
   color: var(--accent-text-primary);
-  opacity: 1;
-  /* Animate the content opacity */
-  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0.1s; /* Slower fade in with delay */
+  opacity: 0.8;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: all 0.2s ease;
 
-  /* Hide content when list is collapsed */
-  .subSectionList.collapsed & {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.1s ease; /* Faster fade out */
-  }
-
-  &.activeSubSection {
-    color: var(--accent-text-primary);
-    font-weight: 600;
-    opacity: 1;
-    transform: translateX(4px);
-  }
-
-  &:hover:not(.activeSubSection) {
+  &:hover {
     background-color: var(--accent-primary-lighter);
-    color: var(--accent-text-primary);
     opacity: 1;
   }
 }
 
+.activeSubSection {
+  font-weight: 600;
+  opacity: 1;
+}
+
 .sidebarFooter {
-  padding: 0;
-  border-top: 1px solid rgba(224, 231, 255, 0.3); /* Made separator more visible */
+  padding: 16px;
   flex-shrink: 0;
   background-color: var(--accent-primary-darker);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  .toggleButtonWrapper {
-    @include tablet {
-      display: none;
-    }
+.sidebarFooter .menuItem {
+  padding: 0;
+  background: none;
+  flex-grow: 1;
+
+  &:hover {
+    background: none;
   }
 }
 
@@ -305,24 +313,27 @@
 }
 
 .toggleButton {
-  background: var(--accent-gradient);
+  background: var(--accent-primary-lighter);
   color: var(--accent-text-primary);
   border: none;
   cursor: pointer;
-  padding: 16px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  font-size: 1.2rem; // Увеличим иконку
-  transition: filter 0.2s;
+  font-size: 1.2rem;
+  transition: all 0.2s;
+  flex-shrink: 0;
 
   &:hover {
     filter: brightness(1.2);
   }
 
   .sidebar.collapsed & {
-    padding: 16px 0;
+    width: 100%;
+    border-radius: 8px;
   }
 } 
 
@@ -362,35 +373,27 @@
 } 
 
 .sectionHeader {
-  padding: 16px 20px;
-  border-bottom: 1px solid rgba(224, 231, 255, 0.3); /* Made separator more visible */
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  padding: 16px 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(224, 231, 255, 0.2);
 }
 
-.backButton {
-  background: transparent;
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
   border: none;
+  cursor: pointer;
+  padding: 0;
   color: var(--accent-text-primary);
   opacity: 0.7;
-  cursor: pointer;
-  padding: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: all 0.2s;
+  font-size: 14px;
+  margin-bottom: 16px;
+  transition: opacity 0.2s;
 
   &:hover {
     opacity: 1;
-    background-color: var(--accent-primary-lighter);
-  }
-
-  svg {
-    width: 20px;
-    height: 20px;
   }
 }
 
@@ -398,7 +401,9 @@
   font-size: 18px;
   font-weight: 600;
   color: var(--accent-text-primary);
-  line-height: 1.3; /* Allow multiline titles to breathe */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .scrollableNav {
@@ -411,4 +416,32 @@
   }
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+} 
+
+.sidebar.collapsed .sectionHeader {
+  display: none;
+}
+
+.sidebarFooter {
+  padding: 16px;
+  border-top: 1px solid rgba(224, 231, 255, 0.2);
+  flex-shrink: 0;
+  background-color: var(--accent-primary-darker);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebar.collapsed .sidebarFooter .menuItem {
+  display: none;
+}
+
+.sidebarFooter .menuItem {
+  padding: 0;
+  background: none;
+  flex-grow: 1;
+
+  &:hover {
+    background: none;
+  }
 } 

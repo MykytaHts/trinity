@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+:root {
+  --primary-glow: #ff00ff;
+  --secondary-glow: #00ffff;
+  --bg-color: #1a0a2a;
+  --border-color: rgba(0, 255, 255, 0.3);
+  --text-color: #e0e0e0;
+}
+
+.pageWrapper {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  font-family: 'Orbitron', sans-serif;
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+/* Animated Background Grid */
+.gridOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(var(--border-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: move-grid 10s linear infinite;
+  perspective: 500px;
+}
+
+@keyframes move-grid {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 -100px;
+  }
+}
+
+/* Scanlines effect */
+.scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(26, 10, 42, 0) 50%,
+    rgba(0, 0, 0, 0.25) 50%
+  );
+  background-size: 100% 4px;
+  animation: scanlines 4s linear infinite;
+  opacity: 0.3;
+}
+
+@keyframes scanlines {
+    from { background-position: 0 0; }
+    to { background-position: 0 100%; }
+}
+
+.header, .mainGrid {
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+  background: rgba(26, 10, 42, 0.8);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 15px var(--secondary-glow);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-glow);
+    text-shadow: 0 0 5px var(--primary-glow), 0 0 10px var(--primary-glow);
+}
+
+.nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.navLink {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 1.1rem;
+  position: relative;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 3px var(--secondary-glow);
+
+  &.active,
+  &:hover {
+    color: var(--primary-glow);
+    text-shadow: 0 0 5px var(--primary-glow), 0 0 10px var(--primary-glow);
+  }
+
+  &.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
+    height: 2px;
+    background: var(--primary-glow);
+    box-shadow: 0 0 8px var(--primary-glow);
+    animation: pulse 1.5s infinite;
+  }
+}
+
+.mainGrid {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 2rem;
+}
+
+.sidebar {
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  background: rgba(26, 10, 42, 0.8);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 15px var(--secondary-glow);
+
+  h3 {
+    color: var(--secondary-glow);
+    text-shadow: 0 0 5px var(--secondary-glow);
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+  }
+}
+
+.sidebarLink {
+  display: block;
+  color: var(--text-color);
+  text-decoration: none;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+
+  &.active,
+  &:hover {
+    color: var(--primary-glow);
+    transform: translateX(5px);
+    text-shadow: 0 0 5px var(--primary-glow);
+  }
+}
+
+.mainContent {
+  border: 1px solid var(--border-color);
+  background: rgba(26, 10, 42, 0.8);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 15px var(--secondary-glow);
+  padding: 2rem;
+}
+
+.contentWrapper {
+  h1 {
+    color: var(--primary-glow);
+    text-shadow: 0 0 8px var(--primary-glow);
+    margin-bottom: 1rem;
+  }
+  p {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+  }
+}
+
+.actionButton {
+  font-family: 'Orbitron', sans-serif;
+  background: transparent;
+  border: 2px solid var(--primary-glow);
+  color: var(--primary-glow);
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--primary-glow);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: var(--primary-glow);
+    color: var(--bg-color);
+    box-shadow: 0 0 20px var(--primary-glow), 0 0 30px var(--primary-glow);
+  }
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+} 
