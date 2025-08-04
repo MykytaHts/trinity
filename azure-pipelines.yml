@@ -1,0 +1,41 @@
+# Имя файла: azure-pipelines.yml
+
+trigger:
+- main # Запускается при изменениях в ветке main
+
+pool:
+  vmImage: 'ubuntu-latest' # Используем виртуальную машину с Ubuntu
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '20.x' # 1. Устанавливаем Node.js
+  displayName: 'Install Node.js'
+
+- script: npm install # 2. Устанавливаем зависимости
+  displayName: 'npm install'
+
+- script: npm run build # 3. Собираем приложение
+  displayName: 'npm run build'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: 'dist' 
+    includeRootFolder: false
+    archiveType: 'zip'
+    # Создаем .zip файл с уникальным именем (ID сборки)
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+  displayName: '4. Archive build files'
+
+- task: UniversalPackages@0
+  inputs:
+    command: 'publish'
+    publishDirectory: '$(Build.ArtifactStagingDirectory)'
+    feedsToUsePublish: 'internal'
+    # ВАЖНО: Замените 'ИМЯ_ПРОЕКТА' на имя вашего проекта в Azure DevOps
+    vstsFeedPublish: 'suzuk/trinity-feed'
+    vstsFeedPackagePublish: 'trinity-app' # Имя вашего пакета
+    versionOption: 'patch' # Версия будет 1.0.1, 1.0.2 и т.д.
+    packagePublishDescription: 'Frontend build artifact'
+  displayName: '5. Publish artifact to Azure Artifacts'
